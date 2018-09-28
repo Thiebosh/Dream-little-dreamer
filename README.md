@@ -1,4 +1,4 @@
-# Projet-e-commerce-website-BOMY-MOREL-NADEAU
+# Projet-e-commerce-website-BOMY-MOREL-NADEAU-LAGARDE
 
 Contribuants :
 BOMY Clara
