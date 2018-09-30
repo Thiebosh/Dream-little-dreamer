@@ -1,0 +1,73 @@
+body{text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+h1 { font-size: 1.75em;}
+
+h2 { font-size: 1em;}
+
+fieldset {
+    border: 0;
+    width: 50%;
+    margin: auto;
+    text-align: left;
+}
+
+p {
+    text-align: left;
+}
+
+p input {
+    padding: 0.4em 0;
+    margin: auto;
+}
+
+a {
+    font-style: italic;
+    text-decoration: underline;
+    color: black;
+}
+
+label {
+    font-size: 1em;
+}
+
+table {
+    width: 100%;
+}
+
+table td:first-of-type {padding: 0 1em 0 0;
+}
+
+table th:last-of-type, table td:last-of-type {padding: 0 0 0 1em;
+}
+
+input:not(.genre):not(.bouton) {
+    width: 100%;
+    margin: 0.2em;
+    font-size: small;
+}
+
+.genre {
+    font-weight: bold;
+}
+
+.genre:nth-of-type(2) {
+    margin-left: 1em;
+}
+
+.bouton {
+    background-color: black;
+    color: white;
+    display: block;
+    width: 75%;
+    margin: auto;
+    padding: 0.4em; 
+    border-radius: 4px;
+}
+
+.bouton:hover {
+    cursor: pointer;
+}
+
