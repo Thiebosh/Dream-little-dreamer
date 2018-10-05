@@ -1,0 +1,38 @@
+/* Le bloc des images defilantes */	
+section .slider-holder {
+    width: 800px;
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+	overflow: hidden; /* les autres images soient câchées */
+}
+ 
+ /* Le fond du bloc des images défilantes + boutons */
+section .image-holder {
+    width: 2400px;
+    height: 400px;
+    position: relative; /* permet de choisir la position des images */
+    transition: left 2s; /* temps de transition entre 2 images */
+}
+      
+section .slider-image { float: left; }
+
+/* target est une pseudo-class qui permet de s'occuper d'element non affiches */
+section #slider-image-1:target ~ .image-holder { left: 0px; }
+    
+section #slider-image-2:target ~ .image-holder { left: -800px; }
+       
+section #slider-image-3:target ~ .image-holder { left: -1600px; }
+      
+section .button-holder {
+    position: relative;
+    top: -20px;
+}
+    
+section .slider-change {
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    border-radius: 5px;
+    background-color: silver;
+}

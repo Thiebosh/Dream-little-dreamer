@@ -1,0 +1,46 @@
+section {
+    font-weight: bold;
+    width: 50%;
+    margin: auto;
+}
+
+section h2 { font-size: 1.75em; }
+
+section h3 { font-size: 1.5em; }
+
+section img {
+    float: left;
+    border-radius: 8px;
+    display: block;
+    width: 12%;
+    border-width:1px;
+    border-style:dotted;
+    border-color:#999;
+}
+
+section div {
+    width: 65%;
+    margin: auto;
+    margin-bottom: 0.7em;
+    text-align: left;
+}
+
+section span:first-of-type { padding: 0 1em 0 0; }
+
+section span:last-of-type { padding: 0 0 0 1em; }
+
+section a {
+    text-decoration: none;
+}
+
+section button {
+    background-color: #999;
+    color: white;
+    display: block;
+    width: 45%;
+    margin: auto;
+    padding: 0.4em; 
+    border-radius: 4px;
+}
+
+section button:hover { cursor: pointer; }

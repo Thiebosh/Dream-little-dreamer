@@ -1,0 +1,88 @@
+.table_produit {
+	margin-left:auto;
+	margin-right:auto;
+	width:1000px;
+}
+
+#title1
+{
+	text-align: center;
+	font-size: 1.75em;
+}
+
+
+.table_produit
+{
+	border-collapse: collapse;
+	border-color: 1px solid gray;
+	min-height: 15em;
+}
+
+section thead {
+	border: 1px solid black;
+	text-align: center;
+	width: 100px;
+	height: 50px;
+	background-color: darkgray;
+	color: white;
+}
+
+.panier_vide
+{
+	text-align: left;
+	margin-left: 100px;
+}
+
+.retour_site
+{
+	text-align: left;
+	margin-left: 100px;
+}
+
+.separateur 
+{
+	text-align: center;
+	color: gray;
+}
+
+
+.bouton {
+	margin:50px; /* espacement entre les boutons*/
+	min-width:80px;
+	text-indent: 0.5em;
+	padding: 0.5em 0.5em 0.5em 0;
+	border-radius:5px;
+	box-shadow:  0 0 2px #555;
+	background:#999; /*couleur du fond*/
+	color:white;
+	border:3px outset #EEE;
+}
+
+.bouton:active{
+	border:3px inset #EEE;
+}
+
+#sorties_panier{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	margin:auto;
+	padding: 0.4em 0 ;
+}
+
+section{
+	min-height:500px;
+	padding: 0.4em 0;
+	margin: auto;
+}
+
+section p a {
+	color: black;
+} 
+
+
+section > div a {
+	text-decoration: none;
+	color:white;
+}
+

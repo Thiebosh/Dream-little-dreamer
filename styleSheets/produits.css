@@ -1,0 +1,44 @@
+.fiche-produits
+{
+	border:2px;
+    width:80%;
+	border:0;
+	margin: auto;
+	padding:0;
+}
+.fiche-produits thead{
+	background: #BBB;
+	color: white;
+}
+section thead th {
+	
+	height: 4em;
+}
+
+section aside {
+	display: flex;
+	flex-direction: row;
+	margin:auto;
+	justify-content: space-around;
+}
+
+.boutons {
+	margin:50px; /* espacement entre les boutons*/
+	min-width:80px;
+	text-indent: 0.5em;
+	padding: 0.5em 0.5em 0.5em 0;
+	border-radius:5px;
+	box-shadow:  0 0 2px #555;
+	background:#999; /*couleur du fond*/
+	color:white;
+	border:3px outset #EEE;
+}
+
+.boutons:active{
+	border:3px inset #EEE;
+}
+
+section a {
+	text-decoration: none;
+	color:white;
+}

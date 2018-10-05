@@ -1,0 +1,108 @@
+body { /*commun a tous*/
+	font-family: Georgia;
+	text-align: center;
+	padding-bottom: 2em;
+}
+
+header a {
+	text-decoration: none;
+	color: white;
+	cursor: pointer;
+}
+
+header nav {
+    height: 35px;
+    width: 100%;
+    background-color: black;
+}
+
+header nav form:first-of-type {
+	position: absolute;
+	top: 15px;
+	left: 1em;
+}
+
+header nav form:nth-of-type(2) {
+	position: absolute;
+	top: 15px;
+	left: 32em;
+}
+
+header nav form:last-of-type {
+	position: absolute;
+	top: 15px;
+	right: 6em;
+}
+
+header nav img {
+	height: 50px;
+	position: absolute;
+	top: 10px;
+	right: 1em;
+}
+
+header h1 { 
+    width: 50%;
+    margin: auto;
+}
+
+header h1:hover img {
+    border-bottom: 1px solid lightgray;
+}
+
+header h1 img {
+	display: block; /* indique le format comme un bloc */
+	margin: auto; /* centre le bloc */
+}
+
+header menu {
+	margin: auto;  
+	padding: 0;	/* réinitialiser la marge interne */
+}
+
+header menu li { display: inline-block; }
+
+header menu ul {
+	padding: 0;			 	
+	position: absolute;		/* mise en place du menu déroulant */
+}
+
+header menu ul li { display: block; }
+
+/* gestion des menus */
+
+header menu ul  { display: none; }			/* ne pas afficher les menus déroulants */
+	
+/* on affiche le menu au survol et au clic */
+header menu li:hover ul, header menu li:focus ul{
+	display: block;
+	left: auto;				/* on laisse le navigateur positionner  */
+	margin: 0;
+}
+
+header menu {
+	color:white;
+	border-radius: 5px;	/* créer des bordure arrondie */
+}
+
+header menu  li {
+	margin: 50px; /* espacement entre les boutons*/
+	min-width: 80px;
+	text-indent: 0.5em;
+	padding: 0.5em 0.5em 0.5em 0;
+	border-radius:5px;
+	box-shadow: 0 0 2px #555;
+	background: #999; /*couleur du fond*/
+}
+	
+header menu li li { margin: 0px; }
+
+header menu li:hover {
+	background: #ccc;
+	cursor: pointer;/* a retirer quand tous les li contiendront des a */
+}
+
+header menu li li:hover {
+	margin: 0px;
+	background: #ccc;
+}
