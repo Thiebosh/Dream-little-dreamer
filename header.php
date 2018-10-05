@@ -1,20 +1,19 @@
 <header>
 	<nav>
+		<a href="inscription.php"><button>S'inscrire</button></a>
+
 		<form method="post" action="profil.php">
-			<input type="email" 	name="email" 	placeholder="EMAIL@EXEMPLE.COM" required>
-			<input type="password" 	name="pass"		placeholder="MOT DE PASSE" required>
-			<input type="submit" value="Se connecter"/>
+			<input type="email" 	name="email" 	placeholder="EMAIL@EXEMPLE.COM"	required>
+			<input type="password" 	name="pass"		placeholder="MOT DE PASSE" 		required>
+			<input type="submit" class="button" value="Se connecter"/>
 		</form>
-		<form method="post" action="inscription.php">
-			<input type="submit" value="S'inscrire"/>
-		</form>
-		<form method="get" action="wip.php">
+		
+		<form method="get" action="recherche.php">
 			<input type="text" 		name="search"	placeholder="Rechercher" />
-			<input type="submit" value="Rechercher" />
+			<input type="submit" class="button" value="Rechercher" />
 		</form>
-		<a href="panier.php">
-			<img src="images/panier.png" alt="Panier"/>
-		</a>
+
+		<a href="panier.php"><img src="images/panier.png" alt="Panier"/></a>
 	</nav>
 	
 	<h1>
