@@ -1,68 +1,80 @@
-<!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<link href="styleSheets/normalize.css" rel="stylesheet"/>
-		<link href="styleSheets/boutique.css" rel="stylesheet"/>
-		<link href="styleSheets/header.css" rel="stylesheet"/><!--remodifie juste le style du header-->
-		<link href="styleSheets/footer.css" rel="stylesheet"/>
-		<title>Dream little dreamer</title>
-	</head>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<link href="styleSheets/normalize.css" rel="stylesheet"/>
+	<link href="styleSheets/global.css" rel="stylesheet"/>
+	<link href="styleSheets/menu.css" rel="stylesheet"/>
+	<link href="styleSheets/boutique_search.css" rel="stylesheet"/>
+	<title>Dream little dreamer</title>
+</head>
 	
 <body>
 	<?php require("header.php"); ?>
 
 	<section>
-		<h2> Boutique </h2>
-						
+		<h2 class="title1">BOUTIQUE</h2>
+		
+		<br><hr><br>
+
 		<article id="lampe">
-			<h3>Lampes</h3>
-			<aside class="produit">
-				<img class="images-produits" src="images/lampe1.jpg">
-				<span class="desc_prod">
+			<h3>LAMPES</h3>
+			<br>
+			<aside>
+				<img src="images/lampe1.jpg" alt="Lampe1">
+				<div>
 					<h4>Lampe de chevet enfant</h4>
-					Toute mignonne , cette lampe à poser éclairera doucement la chambre de votre enfant tout en la décorant délicatement.
-					<br><b>20,00 euros</b>
-					<br>
-					<button class="boutons"><a href="produit.php">Acheter</a></button>
-				</span>
+					Toute mignonne, cette lampe à poser éclairera doucement la chambre de votre enfant tout en la décorant délicatement.<br>
+					<b>20,00 euros</b><br>
+					<br><br>
+					<a class="button" href="produit.php">Ajouter au panier</a>
+				</div>
 			</aside>
-			<aside class="produit">
-				<img class="images-produits" src="images/lampe2.jpg">
-				<span class="desc_prod">
-					<h4>Plaffonier Mapple</h4>
-					Cette lampe fait apparaitre une véritable forêt de feuilles et assure incontestablement un éclairage chalheureux.
-					<br><b>40,00 euros</b> 
-					<br>
-					<button class="boutons"><a href="produit.php">Acheter</a></button>
-				</span>
+			<br>
+			<aside>
+				<img src="images/lampe2.jpg" alt="Lampe2">
+				<div>
+					<h4>Plafonier Mapple</h4>
+					Cette lampe fait apparaitre une véritable forêt de feuilles et assure incontestablement un éclairage chalheureux.<br>
+					<b>40,00 euros</b><br>
+					<br><br>
+					<a class="button" href="produit.php">Ajouter au panier</a>
+				</div>
 			</aside>
 		</article>
 
+		<br><hr><br>
+
 		<article id="bougie">
-			<h3>Bougies</h3>
-			<aside class="produit">
-				<img class="images-produits" src="images/bougie1.jpg">
-				<span class="desc_prod">
+			<h3>BOUGIES</h3>
+			<br>
+			<aside>
+				<img src="images/bougie1.jpg" alt="Bougie1">
+				<div>
 					<h4>Bougie ananas rose</h4>
-					Bougie de cire contenue dans une boîte en porcelaine en forme d'ananas avec couvercle.
-					<br><b>5,00 euros</b>
-					<br>
-					<button class="boutons"><a  href="produit.php">Acheter</a></button>
-				</span>
+					Bougie de cire contenue dans une boîte en porcelaine en forme d'ananas avec couvercle.<br>
+					<b>5,00 euros</b><br>
+					<br><br>
+					<a class="button" href="produit.php">Ajouter au panier</a>
+				</div>
 			</aside>
-			<aside class="produit">
-				<img class="images-produits" src="images/bougie2.jpg">
-				<span class="desc_prod">
+			<br>
+			<aside>
+				<img src="images/bougie2.jpg" alt="Bougie2">
+				<div>
 					<h4>Lot de 3 bougies led horizon doré</h4>
-					Pratiques, la flamme ne brûle pas et elles ne s'éteignent pas au moindre courant d'air.
-					<br><b>20,00 euros</b> 
-					<br>
-					<button class="boutons"><a  href="produit.php">Acheter</a></button>
-				</span>
+					Pratiques, la flamme ne brûle pas et elles ne s'éteignent pas au moindre courant d'air.<br>
+					<b>20,00 euros</b><br>
+					<br><br>
+					<a class="button" href="produit.php">Ajouter au panier</a>
+				</div>
 			</aside>
 		</article>
 	</section>
+
 	<?php require("footer.php"); ?>
 </body>
 </html>

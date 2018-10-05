@@ -6,10 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link href="styleSheets/normalize.css" rel="stylesheet"/>
+    <link href="styleSheets/global.css" rel="stylesheet"/>
+    <link href="styleSheets/menu.css" rel="stylesheet"/>
     <link href="styleSheets/inscription_connexion.css" rel="stylesheet"/>
-    <link href="styleSheets/header.css" rel="stylesheet"/>
-    <link href="styleSheets/footer.css" rel="stylesheet"/>
-    <title>Connexion</title>
+	<title>Dream little dreamer</title>
 </head>
 
 <body>
@@ -23,10 +23,10 @@
             <form method="post" action="profil.php">
                 <p class="contenu"> 
                     <label  for="email">E-MAIL</label><br>
-                    <input class="form_input" id="email" type="email"      name="email"    placeholder="EMAIL@EXEMPLE.COM" required>
+                    <input class="form_input" id="email" type="email"      name="email"    placeholder="EMAIL@EXEMPLE.COM"  required>
                     <br><br><!--saut de ligne-->
                     <label  for="pass">MOT DE PASSE</label><br>
-                    <input  class="form_input" id ="pass" type="password"  name="pass"     placeholder="MOT DE PASSE" required>
+                    <input  class="form_input" id ="pass" type="password"  name="pass"     placeholder="MOT DE PASSE"       required>
                 </p>
                 <input class ="bouton" type="submit" value="Se connecter"/>
             </form>

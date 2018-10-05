@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link href="styleSheets/normalize.css" rel="stylesheet"/>
+	<link href="styleSheets/global.css" rel="stylesheet"/>
+	<link href="styleSheets/menu.css" rel="stylesheet"/>
     <link href="styleSheets/profil.css" rel="stylesheet"/>
-    <link href="styleSheets/header.css" rel="stylesheet"/>
-    <link href="styleSheets/footer.css" rel="stylesheet"/>
-    <title>Mon compte</title>
+	<title>Dream little dreamer</title>
 </head>
 
 <body>
     <?php require("header.php"); ?>
 
     <section>
-        <h2>VOTRE COMPTE</h2>
-        <h3>Vos informations personnelles</h3><br>
+        <h2 class="title1">VOTRE COMPTE</h2>
+        <h3 class="title2">Vos informations personnelles</h3><br>
         <article>
             <img src="images/avatar.jpg" alt ="votre avatar"/>
             <div>
@@ -29,7 +29,7 @@
             <div>E-MAIL : <em>mail_client</em></div>
         </article>
         <br><br>
-        <a href="connexion.php" title="Déconnexion"><button type="button">Déconnexion</button></a>
+        <a class="button" href="connexion.php">Déconnexion</a>
     </section>
 
 <?php require("footer.php"); ?>

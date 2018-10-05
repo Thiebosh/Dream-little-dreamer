@@ -1,0 +1,23 @@
+section aside{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+section > hr {
+	border-top:1px dotted #999;
+	width: 55%;
+}
+
+section div {
+	max-width:30%;
+}
+
+section img {
+	margin:30px;
+	border:1px solid lightgrey;
+	border-radius: 4px;
+	width:20ex;
+	height:20ex;	
+}
+
