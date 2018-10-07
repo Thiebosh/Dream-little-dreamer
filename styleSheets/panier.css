@@ -1,32 +1,13 @@
-section table {
-	margin: auto;
-	width:1000px;
-	border-collapse: collapse;
-	border-color: 1px solid gray;
-	min-height: 15em;
-}
-
-section thead {
-	border: 1px solid black;
-	text-align: center;
-	height: 50px;
-	background-color: darkgray;
-	color: white;
-}
-
-
 section span {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
-	margin:auto;
 	padding: 0.4em 0 ;
 	margin:50px; /* espacement entre les boutons*/
 }
 
-section {
-	min-height:500px;
+section > a {
+	color: black;
+    text-decoration: underline;
 }
-
-section > a { color: black; } 
 

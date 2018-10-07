@@ -9,21 +9,24 @@
     <link href="styleSheets/global.css" rel="stylesheet"/>
     <link href="styleSheets/menu.css" rel="stylesheet"/>
     <link href="styleSheets/valid_confirm.css" rel="stylesheet"/>
-	<title>Dream little dreamer</title>
+	<title>Dream little dreamer - Confirmation</title>
 </head>
 
 <body>
-    <?php require("header.php"); ?>
+    <?php
+        require("commonPages/header.php");
+        require("commonPages/menu.php");
+    ?>
 
    <section>
        	<h2 class="title1">FÉLICITATIONS</h2>
 		<h3 class="title2" >Votre commande a bien été prise en compte</h3>
         <article>
             <img src="images/confirm.jpg" alt="confimation">
-            <a class="button" href="accueil.php">Retour à l'accueil</a>
+            <a class="button1" href="accueil.php">Retour à l'accueil</a>
         </article>
 	</section>
 
-    <?php require("footer.php"); ?>
+    <?php require("commonPages/footer.php"); ?>
 </body>
 </html>

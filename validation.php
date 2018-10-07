@@ -9,11 +9,14 @@
 	<link href="styleSheets/global.css" rel="stylesheet"/>
 	<link href="styleSheets/menu.css" rel="stylesheet"/>
     <link href="styleSheets/valid_confirm.css" rel="stylesheet"/>
-	<title>Dream little dreamer</title>
+	<title>Dream little dreamer - Validation</title>
 </head>
 
 <body>
-    <?php require("header.php"); ?>
+    <?php
+        require("commonPages/header.php");
+        require("commonPages/menu.php");
+    ?>
 
    <section>
        	<h2 class="title1" >VOUS Y ÊTES PRESQUE !</h2>
@@ -21,12 +24,12 @@
         <article>
             <img src="images/valid.jpg" alt="validation">
             <form method="post" action="confirmation.php"> 
-                <a class="button" href="panier.php">Retour</a>
-                <input class="button" type="submit" value="Confirmer"/>
+                <a class="button1" href="panier.php">Retour</a>
+                <input class="button1" type="submit" value="Confirmer"/>
             </form>
         </article>
     </section>
     
-    <?php require("footer.php"); ?>
+    <?php require("commonPages/footer.php"); ?>
 </body>
 </html>

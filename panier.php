@@ -9,11 +9,14 @@
 	<link href="styleSheets/global.css" rel="stylesheet"/>
 	<link href="styleSheets/menu.css" rel="stylesheet"/>
 	<link href="styleSheets/panier.css" rel="stylesheet"/>
-	<title>Dream little dreamer</title>
+	<title>Dream little dreamer - Panier</title>
 </head>
 
 <body>
-	<?php include 'header.php';?>
+    <?php
+        require("commonPages/header.php");
+        require("commonPages/menu.php");
+    ?>
 	
 	<section>
 		<h2 id="title1">VOTRE PANIER</h2>
@@ -40,11 +43,11 @@
 		</table>
 		
 		<span>
-			<a class="button" href="boutique.php">Continuer mes achats</a>
-			<a class="button" href="validation.php">Valider ma commande</a>
+			<a class="button1" href="boutique.php">Continuer mes achats</a>
+			<a class="button1" href="validation.php">Valider ma commande</a>
 		</span>
 	</section>
 	
-	<?php require("footer.php"); ?>
+	<?php require("commonPages/footer.php"); ?>
 </body>
 </html>

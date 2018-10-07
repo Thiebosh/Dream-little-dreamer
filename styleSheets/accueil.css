@@ -3,7 +3,6 @@ section .slider-holder {
     width: 800px;
     margin: auto;
     margin-top: 50px;
-    text-align: center;
 	overflow: hidden; /* les autres images soient câchées */
 }
  
@@ -28,7 +27,7 @@ section .button-holder {
     position: relative;
     top: -20px;
 }
-    
+
 section .slider-change {
     display: inline-block;
     height: 10px;

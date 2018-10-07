@@ -1,50 +1,30 @@
-header menu {
-	padding: 0;	/* réinitialiser la marge interne */
+menu, menu a {
+	padding: 0;
+	color: white;
 }
 
-header menu li { display: inline-block; }
-
-header menu ul {
-	padding: 0;			 	
-	position: absolute;		/* mise en place du menu déroulant */
-}
-
-header menu ul li { display: block; }
 
 /* gestion des menus */
-
-header menu ul  { display: none; }			/* ne pas afficher les menus déroulants */
-	
-/* on affiche le menu au survol et au clic */
-header menu li:hover ul, header menu li:focus ul{
-	display: block;
-	left: auto;				/* on laisse le navigateur positionner  */
-	margin: 0;
-}
-
-header menu {
-	color:white;
-	border-radius: 5px;	/* créer des bordure arrondie */
-}
-
-header menu  li {
+menu li {
+	position: relative;
+	display: inline-block;
 	margin: 10px 50px; /* espacement entre les boutons*/
-	min-width: 80px;
-	text-indent: 0.5em;
-	padding: 0.5em 0.5em 0.5em 0;
+	width: 8em;
+	padding: 0.5em;
 	border-radius:5px;
 	box-shadow: 0 0 2px #555;
-	background: #999; /*couleur du fond*/
-}
-	
-header menu li li { margin: 0px; }
-
-header menu li:hover {
-	background: #ccc;
-	cursor: pointer;/* a retirer quand tous les li contiendront des a */
+	background-color: #999; /*couleur du fond*/
 }
 
-header menu li li:hover {
-	margin: 0px;
-	background: #ccc;
+menu li:hover { background-color: #ccc; }
+
+menu li ul {
+	position: absolute;		/* mise en place du menu déroulant */
+	left: -2.2em;
+	display: none;			/* ne pas afficher les menus déroulants */
+}
+
+menu li:hover ul, menu li:focus ul, menu li ul li {/* on affiche le menu au survol et au clic */
+	display: block;
+	margin: 0;
 }

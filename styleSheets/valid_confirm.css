@@ -15,5 +15,5 @@ section img {
 section form {
     display: flex;
 	justify-content: space-around;
-	padding: 0.4em 0 ;
+	padding: 0.4em 0;
 }

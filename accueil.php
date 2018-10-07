@@ -9,11 +9,14 @@
     <link href="styleSheets/global.css" rel="stylesheet"/>
     <link href="styleSheets/menu.css" rel="stylesheet"/>
     <link href="styleSheets/accueil.css" rel="stylesheet"/>
-    <title>Dream little dreamer</title>
+    <title>Dream little dreamer - Accueil</title>
 </head>
 
 <body>
-    <?php require("header.php"); ?>
+    <?php
+        require("commonPages/header.php");
+        require("commonPages/menu.php");
+    ?>
 
     <section>
         <h2> Notre nouvelle boutique <em>Dream Little dreamer</em> vient d'ouvrir !</h2><!--h1 réservé aux titres de site par convention-->
@@ -36,6 +39,6 @@
         </article>
     </section>
 
-    <?php require("footer.php"); ?>
+    <?php require("commonPages/footer.php"); ?>
 </body>
 </html>

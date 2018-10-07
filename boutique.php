@@ -9,11 +9,14 @@
 	<link href="styleSheets/global.css" rel="stylesheet"/>
 	<link href="styleSheets/menu.css" rel="stylesheet"/>
 	<link href="styleSheets/boutique_search.css" rel="stylesheet"/>
-	<title>Dream little dreamer</title>
+	<title>Dream little dreamer - Boutique</title>
 </head>
 	
 <body>
-	<?php require("header.php"); ?>
+    <?php
+        require("commonPages/header.php");
+        require("commonPages/menu.php");
+    ?>
 
 	<section>
 		<h2 class="title1">BOUTIQUE</h2>
@@ -30,10 +33,10 @@
 					Toute mignonne, cette lampe à poser éclairera doucement la chambre de votre enfant tout en la décorant délicatement.<br>
 					<b>20,00 euros</b><br>
 					<br><br>
-					<a class="button" href="produit.php">Ajouter au panier</a>
+					<a class="button1" href="produit.php">Ajouter au panier</a>
 				</div>
 			</aside>
-			<br>
+			<br><hr><br>
 			<aside>
 				<img src="images/lampe2.jpg" alt="Lampe2">
 				<div>
@@ -41,7 +44,7 @@
 					Cette lampe fait apparaitre une véritable forêt de feuilles et assure incontestablement un éclairage chalheureux.<br>
 					<b>40,00 euros</b><br>
 					<br><br>
-					<a class="button" href="produit.php">Ajouter au panier</a>
+					<a class="button1" href="produit.php">Ajouter au panier</a>
 				</div>
 			</aside>
 		</article>
@@ -58,10 +61,10 @@
 					Bougie de cire contenue dans une boîte en porcelaine en forme d'ananas avec couvercle.<br>
 					<b>5,00 euros</b><br>
 					<br><br>
-					<a class="button" href="produit.php">Ajouter au panier</a>
+					<a class="button1" href="produit.php">Ajouter au panier</a>
 				</div>
 			</aside>
-			<br>
+			<br><hr><br>
 			<aside>
 				<img src="images/bougie2.jpg" alt="Bougie2">
 				<div>
@@ -69,12 +72,12 @@
 					Pratiques, la flamme ne brûle pas et elles ne s'éteignent pas au moindre courant d'air.<br>
 					<b>20,00 euros</b><br>
 					<br><br>
-					<a class="button" href="produit.php">Ajouter au panier</a>
+					<a class="button1" href="produit.php">Ajouter au panier</a>
 				</div>
 			</aside>
 		</article>
 	</section>
 
-	<?php require("footer.php"); ?>
+	<?php require("commonPages/footer.php"); ?>
 </body>
 </html>

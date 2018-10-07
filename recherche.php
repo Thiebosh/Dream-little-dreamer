@@ -9,11 +9,14 @@
 	<link href="styleSheets/global.css" rel="stylesheet"/>
 	<link href="styleSheets/menu.css" rel="stylesheet"/>
     <link href="styleSheets/boutique_search.css" rel="stylesheet"/>
-    <title>Dream little dreamer</title>
+    <title>Dream little dreamer - Recherche</title>
 </head>
 
 <body>
-    <?php require("header.php"); ?>
+    <?php
+        require("commonPages/header.php");
+        require("commonPages/menu.php");
+    ?>
 
     <section>
         <h2 class="title1">Résultats obtenus pour <em>enfant</em></h2>
@@ -25,14 +28,14 @@
                     Toute mignonne, cette lampe à poser éclairera doucement la chambre de votre enfant tout en la décorant délicatement.
                     <br><b>20,00 euros</b>
                     <br><br>
-                    <a class="button" href="produit.php">Ajouter au panier</a>
+                    <a class="button1" href="produit.php">Ajouter au panier</a>
                 </div>
             </aside>
         </article>
         <br><br><br>
-        <a class="button" href="boutique.php">Retour à la boutique</a>
+        <a class="button1" href="boutique.php">Retour à la boutique</a>
     </section>
 
-    <?php require("footer.php"); ?>
+    <?php require("commonPages/footer.php"); ?>
 </body>
 </html>

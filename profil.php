@@ -9,11 +9,14 @@
 	<link href="styleSheets/global.css" rel="stylesheet"/>
 	<link href="styleSheets/menu.css" rel="stylesheet"/>
     <link href="styleSheets/profil.css" rel="stylesheet"/>
-	<title>Dream little dreamer</title>
+	<title>Dream little dreamer - Profil</title>
 </head>
 
 <body>
-    <?php require("header.php"); ?>
+    <?php
+        require("commonPages/header.php");
+        require("commonPages/menu.php");
+    ?>
 
     <section>
         <h2 class="title1">VOTRE COMPTE</h2>
@@ -29,9 +32,9 @@
             <div>E-MAIL : <em>mail_client</em></div>
         </article>
         <br><br>
-        <a class="button" href="connexion.php">Déconnexion</a>
+        <a class="button1" href="connexion.php">Déconnexion</a>
     </section>
 
-<?php require("footer.php"); ?>
+<?php require("commonPages/footer.php"); ?>
 </body>
 </html>

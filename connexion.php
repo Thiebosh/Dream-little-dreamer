@@ -9,30 +9,32 @@
     <link href="styleSheets/global.css" rel="stylesheet"/>
     <link href="styleSheets/menu.css" rel="stylesheet"/>
     <link href="styleSheets/inscription_connexion.css" rel="stylesheet"/>
-	<title>Dream little dreamer</title>
+	<title>Dream little dreamer - Connexion</title>
 </head>
 
 <body>
-    <?php require("header.php"); ?>
+    <?php
+        require("commonPages/header.php");
+        require("commonPages/menu.php");
+    ?>
 
     <section>
         <h2 class="title1">CONNECTEZ-VOUS À VOTRE COMPTE</h2>
         <h3 class="title2">Pas de compte ? <a href="inscription.php">Créez-en un</a></h3>
-        <article>
-            <!--mise en forme du nom et mot de passe-->
-            <form method="post" action="profil.php">
-                <p class="contenu"> 
-                    <label  for="email">E-MAIL</label><br>
-                    <input class="form_input" id="email" type="email"      name="email"    placeholder="EMAIL@EXEMPLE.COM"  required>
-                    <br><br><!--saut de ligne-->
-                    <label  for="pass">MOT DE PASSE</label><br>
-                    <input  class="form_input" id ="pass" type="password"  name="pass"     placeholder="MOT DE PASSE"       required>
-                </p>
-                <input class ="bouton" type="submit" value="Se connecter"/>
-            </form>
-        </article>
+
+        <form method="post" action="profil.php">
+            <p> 
+                <label  for="email">E-MAIL</label><br>
+                <input class="form_input" id="email" type="email"      name="email"    placeholder="EMAIL@EXEMPLE.COM"  required>
+                <br><br>
+                <label  for="pass">MOT DE PASSE</label><br>
+                <input  class="form_input" id ="pass" type="password"  name="pass"     placeholder="MOT DE PASSE"       required>
+            </p>
+            <br><br>
+            <input class ="button2" type="submit" value="Se connecter"/>
+        </form>
     </section>
     
-    <?php require("footer.php"); ?>
+    <?php require("commonPages/footer.php"); ?>
 </body>
 </html>
