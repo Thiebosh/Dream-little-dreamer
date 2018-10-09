@@ -45,8 +45,8 @@ table {
 	margin: auto;
 	border-collapse: collapse;
 	border: 1px solid gray;
-	width: 70%;
 	min-height: 15em;
+    width: 70%;
 }
 
 thead th, thead td {
@@ -97,6 +97,42 @@ nav img {
 	border-radius: 4px;
 	border: 1px solid #999;
 	height: 50px;
+}
+
+
+
+
+/*$$$$$ STYLE MENU $$$$$*/
+
+menu, menu a {
+	padding: 0;
+	color: white;
+}
+
+
+/* gestion des menus */
+menu li {
+	position: relative;
+	display: inline-block;
+	margin: 10px 50px; /* espacement entre les boutons*/
+	width: 8em;
+	padding: 0.5em;
+	border-radius:5px;
+	box-shadow: 0 0 2px #555;
+	background-color: #999; /*couleur du fond*/
+}
+
+menu li:hover { background-color: #ccc; }
+
+menu li ul {
+	position: absolute;		/* mise en place du menu déroulant */
+	left: -2.2em;
+	display: none;			/* ne pas afficher les menus déroulants */
+}
+
+menu li:hover ul, menu li:focus ul, menu li ul li {/* on affiche le menu au survol et au clic */
+	display: block;
+	margin: 0;
 }
 
 
