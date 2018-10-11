@@ -30,7 +30,7 @@
             <?php /*}*/ ?>
 
             
-            <form method="get" action="routeur.php?action=recherche">
+            <form method="post" action="routeur.php?action=recherche">
                 <span><input type="text" 		name="search"	placeholder="Rechercher"/></span>
                 <input type="submit" class="buttonNav" value="Rechercher"/>
             </form>

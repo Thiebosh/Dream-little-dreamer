@@ -84,3 +84,21 @@ function getInitBoutique() {
 
     return $donnees;
 }
+
+function getInitRecherche($recherche) {
+	
+	$bdd = dbConnect();
+	
+	if (isset($recherche))
+	{
+	$recherche = strtolower($recherche);
+	$select_recherche = $bdd->prepare("SELECT * FROM produit WHERE nom LIKE ? OR description LIKE ?");
+	$select_recherche->execute(array("%".$recherche."%", "%".$recherche."%"));
+	}
+	else
+	{
+	$message = "Vous devez entrer votre requete dans la barre de recherche";
+	}
+    return $select_recherche;
+	
+}

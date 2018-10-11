@@ -45,16 +45,19 @@ try {
             
             require("Vue/panier.php");
         break;
-        case "produit"://*
+        case "produit":
             initProduit((isset($_GET['ref'])) ? $_GET['ref'] : 1);
-        break;/*
+        break;
+		case "recherche":
+            //fonction constructeur accueil
+			initRecherche((isset($_POST['search'])) ? $_POST['search'] : 1);
+		break;
+		/*
         case "profil":
             //fonction constructeur accueil
             require("Vue/accueil.php");
         break;
-        case "recherche":*
-            //fonction constructeur accueil
-            require("Vue/accueil.php");
+        
         break;
         case "validation":*
             //fonction constructeur accueil

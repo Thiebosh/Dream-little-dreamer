@@ -11,3 +11,7 @@ function initBoutique() {
     require('Vue/boutique.php');
 }
 
+function initRecherche($recherche) {
+	$tab_recherche = getInitRecherche($recherche);
+	require('Vue/recherche.php');
+}
