@@ -54,9 +54,11 @@
 	width:20ex;
 }
 
-#pageBoutiqueSearch div { width:30%; }
+#pageBoutiqueSearch div { width: 30%; }
 
-#pageBoutiqueSearch > hr, #pageBoutiqueSearch article > hr { border-top:1px dotted #999; }
+#pageBoutiqueSearch > hr { border-top: 1px dotted #999; }
+
+#pageBoutiqueSearch article > hr { border-top: 2px dotted #999; }
 
 #pageBoutiqueSearch > hr { width: 55%; }
 
@@ -107,6 +109,11 @@
 	margin:50px; /* espacement entre les boutons*/
 }
 
+#pagePanier td { 
+    width: 20%;
+    border-top: 1px solid lightgrey;
+ }
+
 #pagePanier > a {
 	color: black;
     text-decoration: underline;
@@ -119,6 +126,14 @@
 	display: flex;
 	justify-content: space-around;
 	margin:50px;
+}
+
+#pageProduit td { width: 30%; }
+
+#pageProduit .visuel, #pagePanier .visuel {
+	border: 1px solid lightgrey;
+	border-radius: 4px;
+	width: 15ex;
 }
 
 
@@ -165,10 +180,10 @@
     height: 370px;
 }
 
-#pageValidConfirm form {
+#pageValidConfirm span {
     display: flex;
 	justify-content: space-around;
-	padding: 0.4em 0;
+    padding: 0.4em 0;
 }
 
 

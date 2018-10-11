@@ -30,16 +30,16 @@
             <?php /*}*/ ?>
 
             
-            <form method="get" action="routeur.php?action=recherche">
-                <span><input type="text" 		name="search"	placeholder="Rechercher"/></span>
+            <form method="post" action="routeur.php?action=recherche">
+                <input type="text" 		name="search"	placeholder="Rechercher"/>
                 <input type="submit" class="buttonNav" value="Rechercher"/>
             </form>
 
-            <a href="routeur.php?action=panier"><img src="Vue/images/panier.png" alt="Panier"/></a>
+            <a href="routeur.php?action=panier"><img src="Vue/images/panier.png" alt="Visuel panier"/></a>
         </nav>
         
         <h1>
-            <a href="routeur.php?action=accueil"><img src="Vue/images/logo.jpg" alt="Logo"/></a>
+            <a href="routeur.php?action=accueil"><img src="Vue/images/logo.jpg" alt="Visuel logo"/></a>
         </h1>
     </header>
 
@@ -48,8 +48,8 @@
         <li>
             <a href="routeur.php?action=boutique">BOUTIQUE</a>
             <ul>
-                <?php foreach ($boutique as $categorie) { ?>
-                    <li><a href="routeur.php?action=boutique#<?= htmlspecialchars($categorie['type']) ?>"><?= htmlspecialchars($categorie['type']) ?></a></li>
+                <?php foreach ($typeProduits as $type) { ?>
+                    <li><a href="routeur.php?action=boutique#<?= htmlspecialchars($type) ?>"><?= htmlspecialchars($type.'s') ?></a></li>
                 <?php } ?>
             </ul>
         </li>

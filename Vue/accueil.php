@@ -12,9 +12,9 @@ ob_start(); ?>
             <span id="slider-image-2"></span>
             <span id="slider-image-3"></span>
             <div class="image-holder">
-                <img class="slider-image" src="Vue/images/deco.jpg" alt="deco1"/>
-                <img class="slider-image" src="Vue/images/lit.jpg"  alt="deco2"/>
-                <img class="slider-image" src="Vue/images/room.jpg" alt="deco3"/>
+                <img class="slider-image" src="Vue/images/deco.jpg" alt="Visuel 1"/>
+                <img class="slider-image" src="Vue/images/lit.jpg"  alt="Visuel 2"/>
+                <img class="slider-image" src="Vue/images/room.jpg" alt="Visuel 3"/>
             </div>
             <div class="button-holder">
                 <a href="#slider-image-1" class="slider-change"></a>

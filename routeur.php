@@ -1,71 +1,94 @@
 <?php 
 session_start();
+//session_destroy();//pour forcer reinitialisation variables globales
 
-require("controleur.php");
-require("modele.php");
+//require('controleur.php');//pas necessaire d avoir fichier controleur car peu de traitement donc fonctions tres concises => MVC incomplet
+require('modele.php');
+
 
 try {
-    $action = (isset($_GET['action'])) ? $_GET['action'] : 'accueil';
+    //verifier variables de get et post pour vendredi    
+    $typeProduits = getInitMenu();
 
-    
-    
-    
-    switch ($action) {
-        /*case "accueil":
-            //fonction constructeur accueil
-            require("Vue/action.php");
-        break;*/
-        case "boutique":
-            //fonction constructeur boutique
-            initBoutique();
+    switch ((isset($_GET['action'])) ? $_GET['action'] : 'accueil') {
+        case 'accueil':
+            require('Vue/accueil.php');
         break;
-        /*case "confirmation":*
-            //fonction constructeur ...
-            require("Vue/accueil.php");
+        case 'boutique':
+            $boutique = getInitBoutique($typeProduits);
+        
+            require('Vue/boutique.php');
         break;
-        case "connexion":
-            //fonction constructeur accueil
-            require("Vue/accueil.php");
-        break;
-        case "inscription":
-            //fonction constructeur accueil
-            require("Vue/accueil.php");
-        break;*/
-        case "panier":
-        $boutique = getDataMenu();
-            if (isset($_POST['ref']) && isset($_POST['article']) && 
-                isset($_POST['prix']) && isset($_POST['quant'])) {
-                $newArticle['id_produit']   = $_POST['ref'];
-                $newArticle['nom']          = $_POST['article'];
-                $newArticle['prix']         = $_POST['prix'];
-                $newArticle['quantite']        = $_POST['quant'];
+        case 'confirmation':
+            setCommande();
+            $_SESSION['panier'] = array();
 
-                $_SESSION['panier'][] = $newArticle;
+            require('Vue/confirmation.php');
+        break;
+        case 'connexion':
+        //variables page...
+
+            require('Vue/connexion.php');
+        break;
+        case 'inscription':
+        //variables page...
+
+            require('Vue/inscription.php');
+        break;
+        case 'panier':
+            if (isset($_POST['ref']) && isset($_POST['article']) && isset($_POST['prix']) && isset($_POST['quant']) && isset($_POST['dispo'])) {
+                $ajout = false;
+
+                if (isset($_SESSION['panier'])) {
+                    $indice = 0;
+                    while (isset($_SESSION['panier'][$indice])) {
+                        if ($_SESSION['panier'][$indice]['id_produit'] === $_POST['ref']) {
+                            $_SESSION['panier'][$indice]['quantite'] += $_POST['quant'];
+                            $ajout = true;
+                        }
+                        $indice++;
+                    }
+                }
+
+                if (!$ajout) {
+                    $newArticle['id_produit']   = $_POST['ref'];
+                    $newArticle['nom']          = $_POST['article'];
+                    $newArticle['prix']         = $_POST['prix'];
+                    $newArticle['quantite']     = $_POST['quant'];
+                    $newArticle['quant_dispo']  = $_POST['dispo'];
+
+                    $_SESSION['panier'][] = $newArticle;
+                }
             }
+            else if (isset($_POST['viderTable'])) $_SESSION['panier'] = array();//a finir pour vendredi
             
-            require("Vue/panier.php");
+            require('Vue/panier.php');
         break;
-        case "produit"://*
-            initProduit((isset($_GET['ref'])) ? $_GET['ref'] : 1);
-        break;/*
-        case "profil":
-            //fonction constructeur accueil
-            require("Vue/accueil.php");
+        case 'produit':
+            if (!isset($_GET['ref']) || empty($_GET['ref'])) throw new Exception('Référence produit invalide');
+            $produit = getInitProduit($_GET['ref']);
+
+            require('Vue/produit.php');
         break;
-        case "recherche":*
-            //fonction constructeur accueil
-            require("Vue/accueil.php");
+        case 'profil':
+        //variables page...
+        
+            require('Vue/profil.php');
         break;
-        case "validation":*
-            //fonction constructeur accueil
-            require("Vue/accueil.php");
-        break;*/
+        case 'recherche':
+            if (!isset($_POST['search']) || empty($_POST['search'])) throw new Exception('Vous devez entrer votre requete dans la barre de recherche');
+            $recherche = strtolower($_POST['search']);
+            $tab_recherche = getInitRecherche($recherche);
+        
+            require('Vue/recherche.php');
+        break;
+        case 'validation':
+            require('Vue/validation.php');
+        break;
         default: 
-            require("Vue/".$action.".php");//non securise as fuck
+            throw new Exception('Erreur 404 : Page introuvable');
         break;
     }
-    
-
 }
 
 catch(Exception $erreur) {

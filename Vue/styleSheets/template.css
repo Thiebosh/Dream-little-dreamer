@@ -142,7 +142,7 @@ menu li:hover ul, menu li:focus ul, menu li ul li {/* on affiche le menu au surv
 
 menu hr, footer hr {
 	width: 70%;
-	border: 1px solid lightgrey;
+	border: 2px solid lightgrey;
 }
 
 footer {

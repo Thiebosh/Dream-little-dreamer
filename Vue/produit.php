@@ -8,30 +8,29 @@ ob_start(); ?>
 			<input type="hidden" name="ref" 	value="<?= htmlspecialchars($produit['id']) ?>">
 			<input type="hidden" name="article" value="<?= htmlspecialchars($produit['nom']) ?>">
 			<input type="hidden" name="prix" 	value="<?= htmlspecialchars($produit['prix']) ?>">
+			<input type="hidden" name="dispo" 	value="<?= htmlspecialchars($produit['quantite_dispo']) ?>">
 			
 			<table>
 				<thead>
 					<tr>
-						<th colspan="4">
-							<b><em><?= strtoupper(htmlspecialchars($produit['nom'])) ?></em><br> Indiquez la quantité que vous souhaitez commander :</b>
+						<th colspan="3">
+							<b>Indiquez la quantité de <em>"<?= strtoupper(htmlspecialchars($produit['nom'])) ?>"</em> que vous souhaitez commander :</b>
 						</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td></td>
-						<td><b>Article</b></td>
-						<td><b>Prix unitaire</b></td>
-						<td><b>Quantité</b></td>
+						<th>Apperçu</th>
+						<th>Prix unitaire</th>
+						<th>Quantité</th>
 					</tr>
 
 					<tr>
-						<td><img src="Vue/images/produit<?= htmlspecialchars($produit['id']) ?>.jpg" alt="image_produit" width="150"></td>
-						<td><?= htmlspecialchars($produit['nom']) ?></td>
-						<td><?= htmlspecialchars($produit['prix']) ?> euros</td>
+						<td><img class="visuel" src="Vue/images/produit<?= htmlspecialchars($produit['id']) ?>.jpg" alt="Visuel article"></td>
+						<td><?= htmlspecialchars($produit['prix']) ?> €</td>
 						<td>
-							<input type="number" name="quant" min="1" max="10" step="1" value="1">
-							<img src="Vue/images/panier.png" alt="panier" width="21" height="16"> 
+							<input type="number" name="quant" min="1" max="<?= htmlspecialchars($produit['quantite_dispo']) ?>" step="1" value="1">
+							<img src="Vue/images/panier.png" alt="Visuel panier" width="21" height="16"> 
 						</td>
 					</tr>
 				</tbody>

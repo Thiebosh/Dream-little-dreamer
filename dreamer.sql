@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `produit` (
 
 INSERT INTO `produit` (`id`, `type`, `nom`, `description`, `quantite`, `prix`) VALUES
 (1, 'Lampe', 'Lampe de chevet enfant', 'Toute mignonne , cette lampe à poser éclairera doucement la chambre de votre enfant tout en la décorant délicatement.', 100, 20),
-(2, 'Lampe', 'Plaffonier Mapple', 'Cette lampe fait apparaitre une véritable forêt de feuilles et assure incontestablement un éclairage chalheureux. ', 120, 40),
+(2, 'Lampe', 'Plafonnier Mapple', 'Cette lampe fait apparaitre une véritable forêt de feuilles et assure incontestablement un éclairage chalheureux. ', 120, 40),
 (3, 'Bougie', 'Bougie ananas rose', 'Bougie de cire contenue dans une boîte en porcelaine en forme d\'ananas avec couvercle. ', 200, 5),
 (4, 'Bougie', 'Lot de 3 bougies led horizon doré', 'Pratiques, la flamme ne brûle pas et elles ne s\'éteignent pas au moindre courant d\'air. ', 80, 20);
 COMMIT;

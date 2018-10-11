@@ -12,14 +12,14 @@ ob_start(); ?>
 			foreach ($boutique as $categorie) { 
 				if ($compteur_categorie != 0) echo '<br><hr><br>'; ?>
 
-				<article id="<?= htmlspecialchars($categorie['type']) ?>">
-					<h3><?= htmlspecialchars(strtoupper($categorie['type'])) ?></h3>
+				<article id="<?= htmlspecialchars($categorie[0]['type']) ?>">
+					<h3><?= htmlspecialchars(strtoupper($categorie[0]['type'].'s')) ?></h3>
 					<br>
 					<?php $compteur_article = 0;
-						foreach ($categorie['contenu'] as $article) {
+						foreach ($categorie as $article) {
 							if($compteur_article != 0) echo'<br><hr><br>'?>
 							<aside>
-								<img src="Vue/images/produit<?= htmlspecialchars($article['id']) ?>.jpg" alt="Lampe1">
+								<img src="Vue/images/produit<?= htmlspecialchars($article['id']) ?>.jpg" alt="Visuel article">
 								<div>
 									<h4><?= htmlspecialchars($article['nom']) ?></h4>
 									<?= htmlspecialchars($article['description']) ?><br>
