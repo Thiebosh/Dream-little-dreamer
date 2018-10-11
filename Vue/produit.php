@@ -20,7 +20,7 @@ ob_start(); ?>
 				</thead>
 				<tbody>
 					<tr>
-						<th>Apperçu</th>
+						<th>Aperçu</th>
 						<th>Prix unitaire</th>
 						<th>Quantité</th>
 					</tr>
@@ -29,8 +29,11 @@ ob_start(); ?>
 						<td><img class="visuel" src="Vue/images/produit<?= htmlspecialchars($produit['id']) ?>.jpg" alt="Visuel article"></td>
 						<td><?= htmlspecialchars($produit['prix']) ?> €</td>
 						<td>
-							<input type="number" name="quant" min="1" max="<?= htmlspecialchars($produit['quantite_dispo']) ?>" step="1" value="1">
-							<img src="Vue/images/panier.png" alt="Visuel panier" width="21" height="16"> 
+							<?php if ($produit['quantite_dispo'] == 0) echo 'Produit épuisé';
+							else { ?>
+								<input type="number" name="quant" min="1" max="<?= htmlspecialchars($produit['quantite_dispo']) ?>" step="1" value="1">
+								<img src="Vue/images/panier.png" alt="Visuel panier" width="21" height="16"> 
+							<?php } ?>
 						</td>
 					</tr>
 				</tbody>
@@ -38,7 +41,10 @@ ob_start(); ?>
 		
 			<aside>
 				<a class="button1" href="routeur.php?action=boutique">Revenir à la boutique</a> 
-				<input type="submit" class="button1" value="Enregistrer dans mon panier">
+				
+				<?php if ($produit['quantite_dispo'] != 0)  { ?>
+					<input type="submit" class="button1" value="Enregistrer dans mon panier">
+				<?php } ?>
 			</aside>
 		</form>
 	</section>

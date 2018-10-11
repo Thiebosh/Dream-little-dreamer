@@ -13,7 +13,7 @@ ob_start(); ?>
 				if ($compteur_categorie != 0) echo '<br><hr><br>'; ?>
 
 				<article id="<?= htmlspecialchars($categorie[0]['type']) ?>">
-					<h3><?= htmlspecialchars(strtoupper($categorie[0]['type'].'s')) ?></h3>
+					<h3><?= htmlspecialchars(strtoupper($categorie[0]['type'])) ?></h3>
 					<br>
 					<?php $compteur_article = 0;
 						foreach ($categorie as $article) {

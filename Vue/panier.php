@@ -11,7 +11,7 @@ ob_start(); ?>
 		<table>
 			<thead>
 				<tr>
-					<th>Apperçu</th>
+					<th>Aperçu</th>
 					<th>Article</th>
 					<th>Prix unitaire</th>
 					<th>Quantité</th>
@@ -31,18 +31,24 @@ ob_start(); ?>
 					<?php }
 				} ?>
 			</tbody>
-			<!--
-			<tfoot>
-				<tr>
-					<td colspan="5">recap commande (a finir pour vendredi)</td>
-				</tr>
-			</tfoot>
-			-->
+			<?php if ($total !=0) {?>
+				<tfoot>
+					<tr>
+						<td colspan="3"></td>
+						<td>Quantité totale<br><?= htmlspecialchars($quantite_total) ?></td>
+						<td>Prix total<br><?= htmlspecialchars($total) ?> €</td>
+					</tr>
+				</tfoot>
+			<?php } ?>
 		</table>
 		
 		<span>
 			<a class="button1" href="routeur.php?action=boutique">Continuer mes achats</a>
 			<?php if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) { ?>
+				<form method="post" action="routeur.php?action=panier">
+					<input type="hidden" name="viderTable" 	value="True">
+					<input class="button1" type="submit" value="Vider mon panier"/>
+				</form>
 				<a class="button1" href="routeur.php?action=validation">Valider ma commande</a>
 			<?php } ?>
 		</span>

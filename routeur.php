@@ -60,8 +60,20 @@ try {
                     $_SESSION['panier'][] = $newArticle;
                 }
             }
-            else if (isset($_POST['viderTable'])) $_SESSION['panier'] = array();//a finir pour vendredi
+            else if (isset($_POST['viderTable'])) {
+                $_SESSION['panier'] = array();
+                header('Location: routeur.php?action=boutique');
+                exit();
+            }
             
+            $cout = array();
+            $quantite_total = 0;
+            foreach ($_SESSION['panier'] as $article) {
+                $cout[] = $article['prix'] * $article['quantite'];
+                $quantite_total += $article['quantite'];
+            }
+            $total = array_sum($cout);
+
             require('Vue/panier.php');
         break;
         case 'produit':
@@ -76,7 +88,7 @@ try {
             require('Vue/profil.php');
         break;
         case 'recherche':
-            if (!isset($_POST['search']) || empty($_POST['search'])) throw new Exception('Vous devez entrer votre requete dans la barre de recherche');
+            if (!isset($_POST['search']) || empty($_POST['search'])) throw new Exception('Vous devez entrer votre requête dans la barre de recherche');
             $recherche = strtolower($_POST['search']);
             $tab_recherche = getInitRecherche($recherche);
         

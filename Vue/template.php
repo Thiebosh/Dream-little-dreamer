@@ -49,7 +49,7 @@
             <a href="routeur.php?action=boutique">BOUTIQUE</a>
             <ul>
                 <?php foreach ($typeProduits as $type) { ?>
-                    <li><a href="routeur.php?action=boutique#<?= htmlspecialchars($type) ?>"><?= htmlspecialchars($type.'s') ?></a></li>
+                    <li><a href="routeur.php?action=boutique#<?= htmlspecialchars($type) ?>"><?= htmlspecialchars($type) ?></a></li>
                 <?php } ?>
             </ul>
         </li>
