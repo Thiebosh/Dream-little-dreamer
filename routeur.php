@@ -1,5 +1,5 @@
 <?php 
-
+//index.php : fichier combinant routeur.php et controleur.php
 
 session_start();
 //session_destroy();//pour forcer reinitialisation variables globales
@@ -9,7 +9,6 @@ require('modele.php');
 
 
 try {
-    //verifier variables de get et post pour vendredi    
     $typeProduits = getInitMenu();
 
     switch ((isset($_GET['action'])) ? $_GET['action'] : 'accueil') {
@@ -38,11 +37,11 @@ try {
             require('Vue/inscription.php');
         break;
         case 'panier':
-
+            //si post contient infos d'un article, ajoute l'article
             if (isset($_POST['ref']) && isset($_POST['article']) && isset($_POST['prix']) && isset($_POST['quant']) && isset($_POST['dispo'])) {
                 $ajout = false;
 
-                //Si panier déjà initialisé
+                //Si panier déjà initialisé, modifie quantité
                 if (isset($_SESSION['panier'])) {
                     $indice = 0;
                     while (isset($_SESSION['panier'][$indice])) {
@@ -68,32 +67,25 @@ try {
             }
 
             //Supprimer un article du panier
-            else if (isset($_POST['supprimerArticle'])) {
-                $indice = 0;
-                while (isset($_SESSION['panier'][$indice])) {
-                    if ($_SESSION['panier'][$indice]['id_produit'] == $_POST['idArticle']) {
-                        //unset($_SESSION['panier'][$indice]); //suppression de l'article
-                        array_splice($_SESSION['panier'],$indice,1);
-                    }
-                    $indice++;
-                }
-            }
+            else if (isset($_POST['supprimerArticle'])) array_splice($_SESSION['panier'], $_POST['posSupprime'], 1);
 
             //Vider le panier de commande
             else if (isset($_POST['viderTable'])) {
                 $_SESSION['panier'] = array();
-                header('Location: routeur.php?action=boutique');
-                exit();
+                header('Location: routeur.php?action=boutique');//charge nouvelle page (=> nouveau script)
+                exit();//quitte script actuel ("ancienne" page)
             }
             
             //Calcul du prix total et de la quantité totale d'articles
-            $cout = array();
-            $quantite_total = 0;
-            foreach ($_SESSION['panier'] as $article) {
-                $cout[] = $article['prix'] * $article['quantite'];
-                $quantite_total += $article['quantite'];
+            if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) {
+                $cout = array();
+                $quantite_total = 0;
+                foreach ($_SESSION['panier'] as $article) {
+                    $cout[] = $article['prix'] * $article['quantite']; //equivaut a total += $article['prix'] * $article['quantite'] mais permet d'utilser fonction array_sum()
+                    $quantite_total += $article['quantite'];
+                }
+                $total = array_sum($cout);
             }
-            $total = array_sum($cout);
 
             require('Vue/panier.php');
         break;
@@ -110,8 +102,8 @@ try {
         break;
         case 'recherche':
             if (!isset($_POST['search']) || empty($_POST['search'])) throw new Exception('Vous devez entrer votre requête dans la barre de recherche');
-            $recherche = strtolower($_POST['search']);
-            $tab_recherche = getInitRecherche($recherche);
+            $recherche = $_POST['search'];
+            $tab_recherche = getInitRecherche(strtolower($recherche));
         
             require('Vue/recherche.php');
         break;

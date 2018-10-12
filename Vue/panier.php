@@ -21,6 +21,7 @@ ob_start(); ?>
 			</thead>
 			<tbody>
 				<?php if (isset($_SESSION['panier'])) {
+					$positionPanier = 0;
 					foreach($_SESSION['panier'] as $produitCommande) { ?>
 						<tr>
 							<td><img class="visuel" src="Vue/images/produit<?= htmlspecialchars($produitCommande['id_produit']) ?>.jpg" alt="Visuel article"></td>
@@ -30,22 +31,23 @@ ob_start(); ?>
 							<td><?= htmlspecialchars($produitCommande['prix'] * $produitCommande['quantite']) ?> €</td>
 							<td>
 								<form method="post" action="routeur.php?action=panier">
-									<input type="hidden" name="supprimerArticle" 	value="True">
-									<input type="hidden" name="idArticle" 			value="<?= htmlspecialchars($produitCommande['id_produit']) ?>">
-									<input id="supprimerArticle" type="image" src="Vue/images/annule.jpg" width="20" >
+									<input type="hidden" name="supprimerArticle" 	value="true">
+									<input type="hidden" name="posSupprime" 		value="<?= htmlspecialchars($positionPanier) ?>">
+									<input id="supprimerArticle" type="image" src="Vue/images/annule.jpg" width="20">
 								</form>
 							</td>
 						</tr>
-					<?php }
+					<?php $positionPanier++;
+					}
 				} ?>
 			</tbody>
-			<?php if ($total !=0) {?>
+			<?php if (isset($_SESSION['panier']) && !empty($_SESSION['panier']) && $total != 0) {?>
 				<tfoot>
 					<tr>
-						<td colspan="3"></td>
-						<td>Quantité totale<br><?= htmlspecialchars($quantite_total) ?></td>
-						<td>Prix total<br><?= htmlspecialchars($total) ?> €</td>
-						<td></td>
+						<th colspan="3"></th>
+						<th>Quantité totale<br><?= htmlspecialchars($quantite_total) ?></th>
+						<th>Prix total<br><?= htmlspecialchars($total) ?> €</th>
+						<th></th>
 					</tr>
 				</tfoot>
 			<?php } ?>
@@ -55,7 +57,7 @@ ob_start(); ?>
 			<a class="button1" href="routeur.php?action=boutique">Continuer mes achats</a>
 			<?php if (isset($_SESSION['panier']) && !empty($_SESSION['panier'])) { ?>
 				<form method="post" action="routeur.php?action=panier">
-					<input type="hidden" name="viderTable" 	value="True">
+					<input type="hidden" name="viderTable" 	value="true">
 					<input class="button1" type="submit" value="Vider mon panier"/>
 				</form>
 				<a class="button1" href="routeur.php?action=validation">Valider ma commande</a>

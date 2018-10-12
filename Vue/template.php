@@ -31,7 +31,7 @@
 
             
             <form method="post" action="routeur.php?action=recherche">
-                <input type="text" 		name="search"	placeholder="Rechercher"/>
+                <input type="text" name="search" placeholder="Rechercher"/>
                 <input type="submit" class="buttonNav" value="Rechercher"/>
             </form>
 
@@ -65,7 +65,7 @@
         <hr><br>
     </menu>
 
-    <?= $sessionPage ?>
+    <?= $sessionPage ?><!--insere code de la page (dans section)-->
 
     <footer>
         <br><hr><br>

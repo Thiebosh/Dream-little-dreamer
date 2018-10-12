@@ -31,7 +31,7 @@ ob_start(); ?>
 						<td>
 							<?php if ($produit['quantite_dispo'] == 0) echo 'Produit épuisé';
 							else { ?>
-								<input type="number" name="quant" min="1" max="<?= htmlspecialchars($produit['quantite_dispo']) ?>" step="1" value="1">
+								<input type="number" name="quant" min="1" max="<?= htmlspecialchars($produit['quantite_dispo']) ?>" step="1" value="1" title="Entre 1 et <?= htmlspecialchars($produit['quantite_dispo']) ?>">
 								<img src="Vue/images/panier.png" alt="Visuel panier" width="21" height="16"> 
 							<?php } ?>
 						</td>

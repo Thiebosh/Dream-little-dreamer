@@ -9,9 +9,9 @@ ob_start(); ?>
 	    <br><hr><br>
         
         <article>
-            <?php $compteur_article = 0;
+            <?php $displaySeparateur = false;
                 foreach ($tab_recherche as $article) {
-                    if($compteur_article != 0) echo'<br><hr><br>'?>
+                    if ($displaySeparateur === true) echo'<br><hr><br>'?>
                     <aside>
                         <img class="images-produits" src="Vue/images/produit<?= htmlspecialchars($article['id']) ?>.jpg" alt="Visuel article">
                         <div>
@@ -22,7 +22,7 @@ ob_start(); ?>
 			                <a class="button1" href="routeur.php?action=produit&ref=<?= htmlspecialchars($article['id']) ?>">Ajouter au panier</a>
                         </div>
                     </aside>
-                <?php $compteur_article++;
+                <?php $displaySeparateur = true;
             } ?>
         </article>
         <br><br><br>

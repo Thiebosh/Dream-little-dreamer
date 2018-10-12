@@ -99,18 +99,19 @@ function getInitBoutique($typesProduit) {
 
 function getInitRecherche($recherche) {
 	$bdd = dbConnect();
-	
+    
     $query = 'SELECT *
                 FROM produit
-                WHERE nom LIKE :search
-                    OR type LIKE :search
-                    OR description LIKE :search
+                WHERE LOWER(nom) LIKE :search
+                    OR LOWER(type) LIKE :search
+                    OR LOWER(description) LIKE :search
                 ORDER BY nom';
     $table = array('search' => '%'.$recherche.'%');
     $request = $bdd->prepare($query);
     if (!$request->execute($table)) throw new Exception("Base De Données : Echec d'exécution");
 
     /*
+    //contenu de l'objet => non recommandé
     echo '<pre style="text-align: left;">';
     print_r($request);
     echo '</pre>';
@@ -118,13 +119,14 @@ function getInitRecherche($recherche) {
     $select_recherche = $request->fetch(PDO::FETCH_ASSOC);
     $request->closeCursor();
     
+    //contenu d'une ligne mise en tableau
     echo '<pre style="text-align: left;">';
     print_r($select_recherche);
     echo '</pre>';
     */
     $select_recherche = $request->fetchAll(PDO::FETCH_ASSOC);
-    //$request->closeCursor();
     /*
+    //contenu de toutes les lignes mises en tableau
     echo '<pre style="text-align: left;">';
     print_r($select_recherche);
     echo '</pre>';

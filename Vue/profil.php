@@ -7,7 +7,7 @@ ob_start(); ?>
         <h2 class="title1">VOTRE COMPTE</h2>
         <h3 class="title2">Vos informations personnelles</h3><br>
         <article>
-            <img src="Vue/images/avatar.jpg" alt ="votre avatar"/>
+            <img src="Vue/images/avatar.jpg" alt="Votre avatar"/>
             <div>
                 <span>NOM : <em>nom_client</em></span>
                 <span>PRÉNOM : <em>prénom_client</em></span>
