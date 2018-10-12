@@ -8,4 +8,4 @@ NADEAU Morgane
 
 Pour la branche mock-up, commencer par ouvrir le fichier accueil.php
 
-Pour la branche Dynamique-V1, commencer par ouvrir le fichier routeur.php
+Pour la branche Dynamique_V1, commencer par ouvrir le fichier routeur.php
