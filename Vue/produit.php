@@ -43,7 +43,7 @@ ob_start(); ?>
 				<a class="button1" href="routeur.php?action=boutique">Revenir à la boutique</a> 
 				
 				<?php if ($produit['quantite_dispo'] != 0)  { ?>
-					<input type="submit" class="button1" value="Enregistrer dans mon panier">
+					<input type="submit" class="button1" value="Ajouter au panier">
 				<?php } ?>
 			</aside>
 		</form>

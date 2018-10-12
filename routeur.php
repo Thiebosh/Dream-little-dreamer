@@ -1,4 +1,6 @@
 <?php 
+
+
 session_start();
 //session_destroy();//pour forcer reinitialisation variables globales
 
@@ -36,13 +38,16 @@ try {
             require('Vue/inscription.php');
         break;
         case 'panier':
+
             if (isset($_POST['ref']) && isset($_POST['article']) && isset($_POST['prix']) && isset($_POST['quant']) && isset($_POST['dispo'])) {
                 $ajout = false;
 
+                //Si panier déjà initialisé
                 if (isset($_SESSION['panier'])) {
                     $indice = 0;
                     while (isset($_SESSION['panier'][$indice])) {
-                        if ($_SESSION['panier'][$indice]['id_produit'] === $_POST['ref']) {
+                        //Si on a déjà commandé le produit
+                        if ($_SESSION['panier'][$indice]['id_produit'] == $_POST['ref']) {
                             $_SESSION['panier'][$indice]['quantite'] += $_POST['quant'];
                             $ajout = true;
                         }
@@ -50,6 +55,7 @@ try {
                     }
                 }
 
+                //Ajout d'un nouvel article (si pas déjà présent dans le panier)
                 if (!$ajout) {
                     $newArticle['id_produit']   = $_POST['ref'];
                     $newArticle['nom']          = $_POST['article'];
@@ -60,12 +66,27 @@ try {
                     $_SESSION['panier'][] = $newArticle;
                 }
             }
+
+            //Supprimer un article du panier
+            else if (isset($_POST['supprimerArticle'])) {
+                $indice = 0;
+                while (isset($_SESSION['panier'][$indice])) {
+                    if ($_SESSION['panier'][$indice]['id_produit'] == $_POST['idArticle']) {
+                        //unset($_SESSION['panier'][$indice]); //suppression de l'article
+                        array_splice($_SESSION['panier'],$indice,1);
+                    }
+                    $indice++;
+                }
+            }
+
+            //Vider le panier de commande
             else if (isset($_POST['viderTable'])) {
                 $_SESSION['panier'] = array();
                 header('Location: routeur.php?action=boutique');
                 exit();
             }
             
+            //Calcul du prix total et de la quantité totale d'articles
             $cout = array();
             $quantite_total = 0;
             foreach ($_SESSION['panier'] as $article) {

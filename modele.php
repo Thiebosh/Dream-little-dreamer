@@ -1,27 +1,32 @@
 <?php
 
+//modèle.php : fichier pour se connecter à la base de données et récupérer les données 
+
+
 function dbConnect() {
+    //Connexion à la base de données
     $errMsg = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
     $dbName = 'dreamer';
     $dbUser = 'root';
     $dbPass = '';
     
     $dataBase = new PDO('mysql:host=localhost;dbname='.$dbName.';charset=utf8', $dbUser, $dbPass, $errMsg);
+    
+    //En cas d'échec de connexion
     if (!$dataBase) throw new Exception("Base De Données : Echec de connexion");
 
     return $dataBase;
 }
 
 
-
 function getInitMenu() {
     $bdd = dbConnect();
 
-    //recupere liste des categories d article
+    //Récupérer la liste des catégories d articles
     $query = 'SELECT DISTINCT type
                 FROM produit
                 ORDER BY type';
-    $request = $bdd->prepare($query);
+    $request = $bdd->prepare($query);//Préparation de la requête
     if (!$request->execute()) throw new Exception("Base De Données : Echec d'exécution");
 
     foreach($request->fetchAll(PDO::FETCH_COLUMN) as $type) $donnees[] = $type;
@@ -29,19 +34,34 @@ function getInitMenu() {
     return $donnees;
 }
 
+/*
+function getNombreArticles() {
+    $bdd = dbConnect();
+
+    //Récupérer la liste des catégories d articles
+    $query = 'SELECT COUNT(*)
+                FROM produit';
+    $request = $bdd->prepare($query);//Préparation de la requête
+    if (!$request->execute()) throw new Exception("Base De Données : Echec d'exécution");
+
+    $nombreArticles = $request->fetch();
+    $request->closeCursor();
+
+    return $nombreArticles[0];
+}*/
 
 
 function getInitProduit($id_produit) {
     $bdd = dbConnect();
 
-    //recupere les infos d un article specifique
+    //Récupérer les infos d'un article specifique
     $query = 'SELECT nom, prix, quantite as quantite_dispo
                 FROM produit
                 WHERE id = :id_produit';
     $table = array('id_produit' => $id_produit);
     $request = $bdd->prepare($query);
-    if (!$request->execute($table)) throw new Exception("Base De Données : Echec d'exécution");
 
+    if (!$request->execute($table)) throw new Exception("Base De Données : Echec d'exécution");
     $table = $request->fetch(PDO::FETCH_ASSOC);
     $request->closeCursor();
     $table['id'] = $id_produit;
@@ -54,7 +74,7 @@ function getInitProduit($id_produit) {
 function getInitBoutique($typesProduit) {
     $bdd = dbConnect();
 
-    //recupere les infos de chaque article dans chaque categorie
+    //Récupérer les infos de chaque article dans chaque categorie
     foreach($typesProduit as $type) {
         $query = 'SELECT *
                     FROM produit
@@ -68,10 +88,11 @@ function getInitBoutique($typesProduit) {
     }
     
     return $donnees;
-    //code de debugage : affichage du contenu d un tableau
+
+    /*//code de debugage : affichage du contenu d un tableau
     echo '<pre style="text-alig: left;">';
     print_r($donnees);
-    echo '</pre>';
+    echo '</pre>';*/
 }
 
 
@@ -102,7 +123,7 @@ function getInitRecherche($recherche) {
     echo '</pre>';
     */
     $select_recherche = $request->fetchAll(PDO::FETCH_ASSOC);
-    $request->closeCursor();
+    //$request->closeCursor();
     /*
     echo '<pre style="text-align: left;">';
     print_r($select_recherche);
@@ -130,7 +151,7 @@ function setCommande() {
 
 
     //recupere infos client
-    //$client = $_SESSION['client'];//a terme
+    //$client = $_SESSION['client'];//à terme
     $query = 'SELECT id, ad_livraison as adresse
                 FROM client';
     $request = $bdd->prepare($query);
@@ -151,8 +172,7 @@ function setCommande() {
         $request = $bdd->prepare($query);
         if (!$request->execute($table)) throw new Exception("Base De Données : Echec d'exécution");
 
-
-        //actualise nombre d article
+        //actualise nombre d'articles dans la base de données
         $query = 'UPDATE produit
                     SET quantite = :quantite
                     WHERE id = :id_produit';

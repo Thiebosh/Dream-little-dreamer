@@ -119,6 +119,11 @@
     text-decoration: underline;
 }
 
+#pagePanier table input#supprimerArticle {
+    margin-right: 0.7em;
+    margin-top: 0.5em;
+}
+
 
 
 /*$$$$$ STYLE PRODUIT $$$$$*/

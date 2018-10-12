@@ -16,6 +16,7 @@ ob_start(); ?>
 					<th>Prix unitaire</th>
 					<th>Quantité</th>
 					<th>Total</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -27,6 +28,13 @@ ob_start(); ?>
 							<td><?= htmlspecialchars($produitCommande['prix']) ?> €</td>
 							<td><?= htmlspecialchars($produitCommande['quantite']) ?><!--bouton modifier?--></td>
 							<td><?= htmlspecialchars($produitCommande['prix'] * $produitCommande['quantite']) ?> €</td>
+							<td>
+								<form method="post" action="routeur.php?action=panier">
+									<input type="hidden" name="supprimerArticle" 	value="True">
+									<input type="hidden" name="idArticle" 			value="<?= htmlspecialchars($produitCommande['id_produit']) ?>">
+									<input id="supprimerArticle" type="image" src="Vue/images/annule.jpg" width="20" >
+								</form>
+							</td>
 						</tr>
 					<?php }
 				} ?>
@@ -37,6 +45,7 @@ ob_start(); ?>
 						<td colspan="3"></td>
 						<td>Quantité totale<br><?= htmlspecialchars($quantite_total) ?></td>
 						<td>Prix total<br><?= htmlspecialchars($total) ?> €</td>
+						<td></td>
 					</tr>
 				</tfoot>
 			<?php } ?>
