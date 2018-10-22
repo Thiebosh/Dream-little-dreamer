@@ -1,13 +1,11 @@
 <?php
-$nomPage = 'connexion';
-
-
 ob_start(); ?>
     <section id="pageInscriptionConnexion">
         <h2 class="title1">CONNECTEZ-VOUS À VOTRE COMPTE</h2>
-        <h3 class="title2">Pas de compte ? <a href="routeur.php?action=inscription">Créez-en un</a></h3>
+        <h3 class="title2">Pas de compte ? <a href="index.php?action=inscription">Créez-en un</a></h3>
 
-        <form method="post" action="routeur.php?action=profil">
+        <?php if (isset($messageErreur)) echo '<aside class="errMsg">Identifiant ou mot de passe erronné</aside>' ?>
+        <form method="post" action="index.php?action=connexion">
             <p> 
                 <label  for="email">E-MAIL</label><br>
                 <input class="form_input" id="email" type="email"      name="email"    placeholder="EMAIL@EXEMPLE.COM"  required>

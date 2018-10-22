@@ -1,7 +1,4 @@
 <?php
-$nomPage = 'recherche';
-
-//remettre form de produit si ajout direct
 ob_start(); ?>
     <section id="pageBoutiqueSearch">
         <h2 class="title1">Résultats obtenus pour "<em><?= htmlspecialchars($recherche) ?></em>"</h2>
@@ -19,14 +16,14 @@ ob_start(); ?>
                             <?= htmlspecialchars($article['description']) ?><br>
                             <b><?= htmlspecialchars($article['prix']) ?> €</b><br>
                             <br><br>
-			                <a class="button1" href="routeur.php?action=produit&ref=<?= htmlspecialchars($article['id']) ?>">Ajouter au panier</a>
+			                <a class="button1" href="index.php?action=produit&ref=<?= htmlspecialchars($article['id']) ?>">Ajouter au panier</a>
                         </div>
                     </aside>
                 <?php $displaySeparateur = true;
             } ?>
         </article>
         <br><br><br>
-        <a class="button1" href="routeur.php?action=boutique">Retour à la boutique</a>
+        <a class="button1" href="index.php?action=boutique">Retour à la boutique</a>
     </section>
 <?php $sessionPage = ob_get_clean();
 

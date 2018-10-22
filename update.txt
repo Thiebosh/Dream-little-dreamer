@@ -1,0 +1,34 @@
+pages modifiées => action
+
+quasi toutes les pages                      =>  renommage de routeur.php en index.php
+                                                suppression de $nomPage (doublon de $action)
+                                                remplacement partiel de isset par empty (strictement équivalent à !isset($var) || $var == false)
+
+index                                       =>  réorganisation du switch pour plus de clarté
+                                                calcul du prix total du panier optimisé (code avec fonction présent dans précédent dépot)
+                                                ajout nouvel article au panier optimisé (code détaillé présent dans précédent dépot)
+                                                mise en place du code de déconnexion
+                                                sécurisation des formulaires du panier (=> ne travaille plus avec $_POST)
+
+index, modele, connexion, template, profil  =>  mise en place du code de connexion
+                                                modification du template (menu et header)
+                                                suppression récupérations infos client pour commande car déjà dans $_SESSION['client']
+
+template.css                                =>  ajout de la classe errMsg
+
+boutique                                    =>  n'affiche tableau que si non vide
+                                                bouton commencer / continuer achats plutot que lien cliquable
+
+validation                                  =>  si non connecté, ne peut pas valider
+
+(template                                    => affiche message d'erreur plutôt que de lever une exception quand besoin de rester sur la page courante)
+
+
+
+Idées pour aller plus loin :
+créer suivi commande? vue commandes effectuées?
+
+A faire :
+ajouter colonne etat dans table commande. Vaut soit en attente, soit confirmé
+remplacer entrées de password par leur version hashés
+faire deux dossiers: respectRegles et respectMVC (plus tard. quasi à la fin)

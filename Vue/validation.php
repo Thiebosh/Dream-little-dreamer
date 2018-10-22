@@ -1,7 +1,4 @@
 <?php
-$nomPage = 'validation';
-
-
 ob_start(); ?>
     <section id="pageValidConfirm">
         <h2 class="title1" >VOUS Y ÊTES PRESQUE !</h2>
@@ -9,8 +6,9 @@ ob_start(); ?>
         <article>
             <img src="Vue/images/valid.jpg" alt="Visuel validation">
             <span>
-                <a class="button1" href="routeur.php?action=panier">Retour</a>
-                <a class="button1" href="routeur.php?action=confirmation">Confirmer</a>
+                <a class="button1" href="index.php?action=panier">Retour</a>
+                <?php if (!empty($_SESSION['client'])) echo '<a class="button1" href="index.php?action=confirmation">Confirmer</a>';
+                else echo '<a class="button1" href="index.php?action=connexion">Se connecter</a>' ?>
             </span>
         </article>
     </section>

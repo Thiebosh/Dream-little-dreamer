@@ -1,13 +1,10 @@
 <?php
-$nomPage = 'inscription';
-
-
 ob_start(); ?>
     <section id="pageInscriptionConnexion">
         <h2 class="title1">CRÉER VOTRE COMPTE</h2>
-        <h3 class="title2">Déjà un compte ? <a href="routeur.php?action=connexion">Connectez-vous</a></h3>
+        <h3 class="title2">Déjà un compte ? <a href="index.php?action=connexion">Connectez-vous</a></h3>
 
-        <form  method="post" action="routeur.php?action=profil"><!--profil ou connexion?-->
+        <form  method="post" action="index.php?action=profil"><!--profil ou connexion?-->
             <p> 
                 <label><input type="radio" name="civi2" value="M" checked="checked"/> M</label>
                 &nbsp;&nbsp;

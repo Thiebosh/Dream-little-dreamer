@@ -16,6 +16,10 @@ a {
     text-decoration: none;
 }
 
+.errMsg {
+	color: crimson;
+}
+
 .button1:hover, .button2:hover, .buttonNav:hover { cursor: pointer; }
 
 .button1, .button2 {
@@ -82,9 +86,9 @@ nav > .buttonNav, nav form:first-of-type, nav form:last-of-type {
 	top: 15px;
 }
 
-nav > .buttonNav { left: 1em;}
+nav .navElt:nth-child(1) { left: 1em;}
 
-nav form:first-of-type { left: 10em;}
+nav .navElt:nth-child(2) { left: 10em;}
 
 nav form:last-of-type { right: 6em;}
 
@@ -148,4 +152,9 @@ menu hr, footer hr {
 footer {
     margin-top: 50px;
     font-weight: bold;
+}
+
+footer a {
+	color: black;
+    text-decoration: underline;
 }

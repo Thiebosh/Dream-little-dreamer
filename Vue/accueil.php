@@ -1,7 +1,4 @@
 <?php
-$nomPage = 'accueil';
-
-
 ob_start(); ?>
     <section id="pageAccueil">
         <h2> Notre nouvelle boutique <em>Dream Little dreamer</em> vient d'ouvrir !</h2>

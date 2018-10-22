@@ -8,58 +8,59 @@
     
     <link href="Vue/styleSheets/template.css" rel="stylesheet"/>
     <link href="Vue/styleSheets/section.css" rel="stylesheet"/>
-    <title>Dream little dreamer - <?= htmlspecialchars(ucfirst($nomPage)) ?></title>
+    <title>Dream little dreamer - <?= htmlspecialchars(ucfirst($action)) ?></title>
 </head>
 
 <body>
     <header>
         <nav>
-            <?php /*if (isset($SESSION_['client'])) {
-                echo '<a class="buttonNav" href="routeur.php?action=deconnexion">Déconnexion</a>';
-            }
-            else {*/ ?>
-                <a class="buttonNav" href="routeur.php?action=inscription">S'inscrire</a>
+            <?php if (!empty($_SESSION['client'])) echo '<a class="navElt buttonNav" href="index.php?action=deconnexion">Déconnexion</a>';
+            else { ?>
+                <a class="navElt buttonNav" href="index.php?action=inscription">S'inscrire</a>
 
-                <form method="post" action="routeur.php?action=profil">
+                <form class="navElt" method="post" action="index.php?action=connexion">
                     <span>
                         <input type="email" 	name="email" 	placeholder="EMAIL@EXEMPLE.COM"	required>
                         <input type="password" 	name="pass"		placeholder="MOT DE PASSE" 		required>
                     </span>
                     <input type="submit" class="buttonNav" value="Se connecter"/>
                 </form>
-            <?php /*}*/ ?>
+            <?php } ?>
 
             
-            <form method="post" action="routeur.php?action=recherche">
+            <form method="post" action="index.php?action=recherche">
                 <input type="text" name="search" placeholder="Rechercher"/>
                 <input type="submit" class="buttonNav" value="Rechercher"/>
             </form>
 
-            <a href="routeur.php?action=panier"><img src="Vue/images/panier.png" alt="Visuel panier"/></a>
+            <a class="navElt" href="index.php?action=panier"><img src="Vue/images/panier.png" alt="Visuel panier"/></a>
         </nav>
         
         <h1>
-            <a href="routeur.php?action=accueil"><img src="Vue/images/logo.jpg" alt="Visuel logo"/></a>
+            <a href="index.php?action=accueil"><img src="Vue/images/logo.jpg" alt="Visuel logo"/></a>
         </h1>
     </header>
 
     <menu>
-        <li><a href="routeur.php?action=accueil">ACCUEIL</a></li>
+        <li><a href="index.php?action=accueil">ACCUEIL</a></li>
         <li>
-            <a href="routeur.php?action=boutique">BOUTIQUE</a>
+            <a href="index.php?action=boutique">BOUTIQUE</a>
             <ul>
                 <?php foreach ($typeProduits as $type) { ?>
-                    <li><a href="routeur.php?action=boutique#<?= htmlspecialchars($type) ?>"><?= htmlspecialchars($type) ?></a></li>
+                    <li><a href="index.php?action=boutique#<?= htmlspecialchars($type) ?>"><?= htmlspecialchars($type) ?></a></li>
                 <?php } ?>
             </ul>
         </li>
-        <li><a href="routeur.php?action=panier">MON PANIER</a></li>
+        <li><a href="index.php?action=panier">MON PANIER</a></li>
         <li>
-            CONNEXION
-            <ul>
-                <li><a href="routeur.php?action=connexion">Se connecter </a></li>
-                <li><a href="routeur.php?action=inscription">S'inscrire </a></li>
-            </ul>
+            <?php if (!empty($_SESSION['client'])) echo '<a href="index.php?action=profil">MON PROFIL</a>';
+            else { ?>
+                CONNEXION
+                <ul>
+                    <li><a href="index.php?action=inscription">S'inscrire</a></li>
+                    <li><a href="index.php?action=connexion">Se connecter</a></li>
+                </ul>
+            <?php }  ?>
         </li>
         
         <hr><br>
@@ -70,7 +71,8 @@
     <footer>
         <br><hr><br>
         <span>© 2018 —  Dream Little dreamer  —  Crédits</span><br>
-        <span>Contact : <em>contact@dreamer.fr</em></span>
+        <span>Contact : <em><a href="mailto:contact@dreamer.fr">contact@dreamer.fr</a></em></span><br>
+        &nbsp;
     </footer>
 </body>
 </html>

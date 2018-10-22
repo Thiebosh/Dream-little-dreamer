@@ -1,10 +1,7 @@
 <?php
-$nomPage = 'produit';
-
-
 ob_start(); ?>
 	<section id="pageProduit">
-		<form method="post" action="routeur.php?action=panier">
+		<form method="post" action="index.php?action=panier">
 			<input type="hidden" name="ref" 	value="<?= htmlspecialchars($produit['id']) ?>">
 			<input type="hidden" name="article" value="<?= htmlspecialchars($produit['nom']) ?>">
 			<input type="hidden" name="prix" 	value="<?= htmlspecialchars($produit['prix']) ?>">
@@ -40,11 +37,9 @@ ob_start(); ?>
 			</table>
 		
 			<aside>
-				<a class="button1" href="routeur.php?action=boutique">Revenir à la boutique</a> 
+				<a class="button1" href="index.php?action=boutique">Revenir à la boutique</a> 
 				
-				<?php if ($produit['quantite_dispo'] != 0)  { ?>
-					<input type="submit" class="button1" value="Ajouter au panier">
-				<?php } ?>
+				<?php if ($produit['quantite_dispo'] != 0) echo '<input type="submit" class="button1" value="Ajouter au panier">' ?>
 			</aside>
 		</form>
 	</section>

@@ -1,7 +1,4 @@
 <?php
-$nomPage = 'boutique';
-
-
 ob_start(); ?>
 	<section id="pageBoutiqueSearch">
 		<h2 class="title1">BOUTIQUE</h2>
@@ -25,14 +22,16 @@ ob_start(); ?>
 									<?= htmlspecialchars($article['description']) ?><br>
 									<b><?= htmlspecialchars($article['prix']) ?> euros</b><br>
 									<br><br>
-									<a class="button1" href="routeur.php?action=produit&ref=<?= htmlspecialchars($article['id']) ?>">Ajouter au panier</a>
+									<a class="button1" href="index.php?action=produit&ref=<?= htmlspecialchars($article['id']) ?>">Ajouter au panier</a>
 								</div>
 							</aside>
 						<?php $displaySeparateurProd = true;
-					} ?>
+						}
+					?>
 				</article>
 			<?php $displaySeparateurCat = true;
-		} ?>
+			}
+		?>
 	</section>
 	
 <?php $sessionPage = ob_get_clean();

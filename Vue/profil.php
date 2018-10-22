@@ -1,7 +1,4 @@
 <?php
-$nomPage = 'profil';
-
-
 ob_start(); ?>
     <section id="pageProfil">
         <h2 class="title1">VOTRE COMPTE</h2>
@@ -9,15 +6,15 @@ ob_start(); ?>
         <article>
             <img src="Vue/images/avatar.jpg" alt="Votre avatar"/>
             <div>
-                <span>NOM : <em>nom_client</em></span>
-                <span>PRÉNOM : <em>prénom_client</em></span>
+                <span>NOM : <?= $_SESSION['client']['nom'] ?></span>
+                <span>PRÉNOM : <?= $_SESSION['client']['prenom'] ?></span>
             </div>
-            <div>SEXE : <em>sexe_client</em></div>
-            <div>NUMÉRO DE TÉLÉPHONE : <em>tel_client</em></div>
-            <div>E-MAIL : <em>mail_client</em></div>
+            <div>SEXE : <?= ($_SESSION['client']['genre'])? 'Féminin' : 'Masculin' ?></div>
+            <div>NUMÉRO DE TÉLÉPHONE : <?= $_SESSION['client']['tel'] ?></div>
+            <div>E-MAIL : <?= $_SESSION['client']['email'] ?></div>
         </article>
         <br><br>
-        <a class="button1" href="routeur.php?action=connexion">Déconnexion</a>
+        <a class="button1" href="index.php?action=connexion">Déconnexion</a>
     </section>
 <?php $sessionPage = ob_get_clean();
 
