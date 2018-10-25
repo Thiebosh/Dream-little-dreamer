@@ -1,8 +1,5 @@
 <?php
 
-//modèle.php : fichier pour se connecter à la base de données et récupérer les données 
-
-
 function dbConnect() {
     //Connexion à la base de données
     $errMsg = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
@@ -19,7 +16,7 @@ function dbConnect() {
 }
 
 
-function getInitMenu() {
+function getMenu() {
     $bdd = dbConnect();
 
     //Récupérer la liste des catégories d articles
@@ -35,7 +32,7 @@ function getInitMenu() {
 }
 
 
-function getInitClient($email) {
+function getClient($email) {
     $bdd = dbConnect();
 
     $query = 'SELECT *
@@ -51,24 +48,8 @@ function getInitClient($email) {
     return $donneesClient;
 }
 
-/*
-function getNombreArticles() {
-    $bdd = dbConnect();
 
-    //Récupérer la liste des catégories d articles
-    $query = 'SELECT COUNT(*)
-                FROM produit';
-    $request = $bdd->prepare($query);//Préparation de la requête
-    if (!$request->execute()) throw new Exception("Base De Données : Echec d'exécution");
-
-    $nombreArticles = $request->fetch();
-    $request->closeCursor();
-
-    return $nombreArticles[0];
-}*/
-
-
-function getInitProduit($id_produit) {
+function getProduit($id_produit) {
     $bdd = dbConnect();
 
     //Récupérer les infos d'un article specifique
@@ -87,8 +68,7 @@ function getInitProduit($id_produit) {
 }
 
 
-
-function getInitBoutique($typesProduit) {
+function getBoutique($typesProduit) {
     $bdd = dbConnect();
 
     //Récupérer les infos de chaque article dans chaque categorie
@@ -113,8 +93,7 @@ function getInitBoutique($typesProduit) {
 }
 
 
-
-function getInitRecherche($recherche) {
+function getRecherche($recherche) {
 	$bdd = dbConnect();
     
     $query = 'SELECT *
@@ -123,31 +102,10 @@ function getInitRecherche($recherche) {
                     OR LOWER(type) LIKE :search
                     OR LOWER(description) LIKE :search
                 ORDER BY nom';
-    $table = array('search' => '%'.$recherche.'%');
+    $table = array('search' => '%' . strtolower($recherche) . '%');
     $request = $bdd->prepare($query);
     if (!$request->execute($table)) throw new Exception("Base De Données : Echec d'exécution");
-
-    /*
-    //contenu de l'objet => non recommandé
-    echo '<pre style="text-align: left;">';
-    print_r($request);
-    echo '</pre>';
-    
-    $select_recherche = $request->fetch(PDO::FETCH_ASSOC);
-    $request->closeCursor();
-    
-    //contenu d'une ligne mise en tableau
-    echo '<pre style="text-align: left;">';
-    print_r($select_recherche);
-    echo '</pre>';
-    */
     $select_recherche = $request->fetchAll(PDO::FETCH_ASSOC);
-    /*
-    //contenu de toutes les lignes mises en tableau
-    echo '<pre style="text-align: left;">';
-    print_r($select_recherche);
-    echo '</pre>';
-    */
     
     return $select_recherche;
 }

@@ -1,4 +1,11 @@
-pages modifiées => action
+Préquel :   Les deux dossiers contiennent le même site, avec un code équivalent mais réparti ou géré différemment.
+            Les deux en sont au même stade de développement.
+            RespectConsignes contient la gestion du code demandée par le prof
+            RespectMVC contient la gestion semi professionnelle que vous gériez et que le prof pourrait vous demander à terme
+            En l'état, il suffit de faire des copiers collés de l'un à l'autre pour assurer le portage
+                (attention : view et page ou action pour consignes, Vue et action pour MVC)
+
+$$$$$$$$$  évolution du modèle initial  $$$$$$$$
 
 quasi toutes les pages                      =>  renommage de routeur.php en index.php
                                                 suppression de $nomPage (doublon de $action)
@@ -12,23 +19,45 @@ index                                       =>  réorganisation du switch pour p
 
 index, modele, connexion, template, profil  =>  mise en place du code de connexion
                                                 modification du template (menu et header)
-                                                suppression récupérations infos client pour commande car déjà dans $_SESSION['client']
+                                                suppression récupérations infos client pour commande() car déjà dans $_SESSION['client']
 
 template.css                                =>  ajout de la classe errMsg
 
 boutique                                    =>  n'affiche tableau que si non vide
                                                 bouton commencer / continuer achats plutot que lien cliquable
 
-validation                                  =>  si non connecté, ne peut pas valider
-
-(template                                    => affiche message d'erreur plutôt que de lever une exception quand besoin de rester sur la page courante)
+validation, profil                          =>  si non connecté, ne peut pas valider
 
 
+$$$$$$$$$  passage du précédent modèle à celui du prof  $$$$$$$$
 
-Idées pour aller plus loin :
-créer suivi commande? vue commandes effectuées?
+pages modifiées => action
 
-A faire :
-ajouter colonne etat dans table commande. Vaut soit en attente, soit confirmé
-remplacer entrées de password par leur version hashés
-faire deux dossiers: respectRegles et respectMVC (plus tard. quasi à la fin)
+tous les fichiers   => remaniement des fichiers pour coller à l'index exemple du prof + renommage des variables en $variablePage
+action/panier       => tableau associatif plutôt que numérique, permet d'utiliser des fonctions de php + optimisations
+view/recherche      => utilisation des fonctions de php pour mettre en valeur le résultat de la recherche
+
+
+$$$$$$$$$  portage rétroactif des modifications et amélioration communes  $$$$$$$$
+
+index               => modifs liés au portage
+
+panier              => peut modifier la quantité d'articles depuis le panier : lien sur la quantité
+                        (n'ajoute plus quantité au panier, attribue nouvelle quantité)
+
+boutique, produit   => affiche si déjà dans le panier ou non
+
+légères corrections (id de croix dans boutique dans foreach => classe)
+légère modif css pour le panier (quantité en gras, réduction de margin-top et margin-right en un seul margin)
+
+
+
+
+$$$$$$$$$  Idées pour aller plus loin  $$$$$$$$
+page commandes effectuées, dispo depuis le profil? ou ajouter a menu mon compte, qui contient mon profil et mes commandes?
+créer suivi commande?
+
+$$$$$$$$$  A faire  $$$$$$$$
+sécuriser variables : ne les manie jamais directement
+ajouter colonne etat dans table commande. Vaut soit en attente, soit confirmé. coder fonction getCommandeAttente
+remplacer entrées de password par leur version hashés et remplacer ligne de code correspondante

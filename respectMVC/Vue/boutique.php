@@ -6,9 +6,10 @@ ob_start(); ?>
 		<br><hr><br>
 
 		<?php $displaySeparateurCat = false;
-			foreach ($boutique as $categorie) { 
+			$panierInit = isset($_SESSION['panier']);
+			foreach ($variablePage['boutique'] as $categorie) { 
 				if ($displaySeparateurCat === true) echo '<br><hr><br>'; ?>
-
+	
 				<article id="<?= htmlspecialchars($categorie[0]['type']) ?>">
 					<h3><?= htmlspecialchars(strtoupper($categorie[0]['type'])) ?></h3>
 					<br>
@@ -22,14 +23,16 @@ ob_start(); ?>
 									<?= htmlspecialchars($article['description']) ?><br>
 									<b><?= htmlspecialchars($article['prix']) ?> euros</b><br>
 									<br><br>
-									<a class="button1" href="index.php?action=produit&ref=<?= htmlspecialchars($article['id']) ?>">Ajouter au panier</a>
+									<a class="button1" href="index.php?action=produit&ref=<?= htmlspecialchars($article['id']) ?>">
+										<?= ($panierInit && array_key_exists($article['nom'], $_SESSION['panier']))? 'Modifier le' : 'Ajouter au' ?> panier
+									</a>
 								</div>
 							</aside>
-						<?php $displaySeparateurProd = true;
+							<?php $displaySeparateurProd = true;
 						}
 					?>
 				</article>
-			<?php $displaySeparateurCat = true;
+				<?php $displaySeparateurCat = true;
 			}
 		?>
 	</section>

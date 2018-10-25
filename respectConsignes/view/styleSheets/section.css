@@ -112,17 +112,15 @@
 #pagePanier td { 
     width: 20%;
     border-top: 1px solid lightgrey;
- }
-
-#pagePanier > a {
-	color: black;
-    text-decoration: underline;
 }
 
-#pagePanier table input#supprimerArticle {
-    margin-right: 0.7em;
-    margin-top: 0.5em;
-}
+#pagePanier a :not(#button1) { color: black; }
+
+#pagePanier > a { text-decoration: underline; }
+
+#pagePanier tbody a { font-weight: bold; }
+
+#pagePanier .supprimerArticle { margin: 0.5em 0.7em 0 0; }
 
 
 

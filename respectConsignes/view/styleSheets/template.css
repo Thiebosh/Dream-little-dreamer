@@ -16,9 +16,7 @@ a {
     text-decoration: none;
 }
 
-.errMsg {
-	color: crimson;
-}
+.errMsg { color: crimson; }
 
 .button1:hover, .button2:hover, .buttonNav:hover { cursor: pointer; }
 

@@ -8,7 +8,7 @@
     
     <link href="Vue/styleSheets/template.css" rel="stylesheet"/>
     <link href="Vue/styleSheets/section.css" rel="stylesheet"/>
-    <title>Dream little dreamer - <?= htmlspecialchars(ucfirst($action)) ?></title>
+    <title>Dream little dreamer - <?= htmlspecialchars(ucfirst($variablePage['action'])) ?></title>
 </head>
 
 <body>
@@ -46,8 +46,8 @@
         <li>
             <a href="index.php?action=boutique">BOUTIQUE</a>
             <ul>
-                <?php foreach ($typeProduits as $type) { ?>
-                    <li><a href="index.php?action=boutique#<?= htmlspecialchars($type) ?>"><?= htmlspecialchars($type) ?></a></li>
+                <?php foreach ($variablePage['categories'] as $categorie) { ?>
+                    <li><a href="index.php?action=boutique#<?= htmlspecialchars($categorie) ?>"><?= htmlspecialchars($categorie) ?></a></li>
                 <?php } ?>
             </ul>
         </li>
