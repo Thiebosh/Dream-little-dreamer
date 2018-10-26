@@ -14,9 +14,12 @@ try {
         if (empty($_SESSION['client'])) {
             if ($variablePage['action'] == 'connexion') {//connexion plus fréquente qu'inscription
                 if (isset($_POST['email'], $_POST['pass'])) {
-                    //sécurise à faire (comme panier)
-                    $variablePage['postConnexion'] = array('email' => $_POST['email'], 'pass' => $_POST['pass']); 
-
+                    $variablePage['postConnexion'] = array('email' => $_POST['email'], 'pass' => $_POST['pass']);
+                    $variablePage['postConnexion']['email'] = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+                    $variablePage['postConnexion']['pass'] = filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING);
+                        
+                    if (in_array(false, $variablePage, true)) unset($variablePage['postConnexion']);
+                    
                     //traite
                     $postSecure = $variablePage['postConnexion'];
                     $donneesClient = getClient($postSecure['email']); //pour avoir infos du client par rapport à son email
@@ -39,16 +42,25 @@ try {
             }
             else if ($variablePage['action'] == 'inscription') {
                 //sécurise : à faire vérifier var post, hasher mdp si toutes les var du post sont correctes
-                if (isset($_POST['civil'], $_POST['nom'], $_POST['prenom'], $_POST['tel'], $_POST['email'], $_POST['adresse'], $_POST['password1'], $_POST['password2'])) $variablePage['postInscription'] = array('civil' => $_POST['civil'], 'nom' => $_POST['nom'], 'prenom' => $_POST['prenom'], 'tel' => $_POST['tel'], 'email' => $_POST['email'], 'adresse' => $_POST['adresse'], 'pass1' => $_POST['password1'], 'pass2' => $_POST['password2']);
-
+                if (isset($_POST['civil'], $_POST['nom'], $_POST['prenom'], $_POST['tel'], $_POST['email'], $_POST['adresse'], $_POST['password1'], $_POST['password2'])) {
+                    $variablePage['postInscription'] = array('civil' => $_POST['civil'], 'nom' => $_POST['nom'], 'prenom' => $_POST['prenom'], 'tel' => $_POST['tel'], 'email' => $_POST['email'], 'adresse' => $_POST['adresse'], 'pass1' => $_POST['password1'], 'pass2' => $_POST['password2']);
+                    $variablePage['postInscription']['nom'] = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
+                    $variablePage['postInscription']['prenom'] = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING);
+                    $variablePage['postInscription']['tel'] = filter_input(INPUT_POST, 'tel', FILTER_SANITIZE_STRING);
+                    $variablePage['postInscription']['email'] = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+                    $variablePage['postInscription']['adresse'] = filter_input(INPUT_POST, 'adresse', FILTER_SANITIZE_STRING);
+                    $variablePage['postInscription']['password1'] = filter_input(INPUT_POST, 'password1', FILTER_SANITIZE_STRING);
+                    $variablePage['postInscription']['password2'] = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
                 //password_hash($passwordToHash, PASSWORD_DEFAULT);//selectionne par défaut meilleure fonction de hashage
 
                 //traite
-                //$postSecure = $variablePage['postInscription'];
+                $postSecure = $variablePage['postInscription'];
                 //si infos valide : inscrit client et redirige sur page de connexion
                 //...
+                }
                 //sinon : affiche erreur appropriée
                 $variablePage['errMsg'] = true;
+
                 
                 require('Vue/inscription.php');
             }
@@ -70,8 +82,14 @@ try {
             break;
             
             case 'recherche':
-                if (isset($_POST['search'])) $variablePage['postSearch']['search'] = $_POST['search']; //sécuriser variable search (type string)
-            
+                //sécuriser variable search (type string)
+                if (isset($_POST['search'])) {
+                    $variablePage['postSearch']['search'] = filter_input(INPUT_POST, 'search',  FILTER_SANITIZE_STRING);
+                    
+                    if (in_array(false, $variablePage, true)) unset($variablePage['postSearch']);
+                }
+
+                $variablePage['postSearch']['search'] = $_POST['search'];//sécuriser variable search (type string)
                 if (empty($variablePage['postSearch']['search'])) $variablePage['errMsg'] = true;
                 else {
                     $variablePage['recherche'] = $variablePage['postSearch']['search'];
@@ -90,8 +108,6 @@ try {
                 require('Vue/profil.php');
             break;
 
-
-
             case 'boutique':
                 $variablePage['boutique'] = getBoutique($variablePage['categories']);
             
@@ -99,9 +115,12 @@ try {
             break;
 
             case 'produit':
-            //a faire, sécurisation données
-                if (isset($_GET['ref'])) $variablePage['postProduit']['ref'] = $_GET['ref'];
-                
+                if (isset($_GET['ref'])) {
+                    $options = array('options'=>array('default'=>1, 'min_range'=>1, 'max_range'=>getNbArticles()));
+                    $variablePage['postProduit']['ref'] = filter_input(INPUT_GET, 'ref', FILTER_VALIDATE_INT, $options);
+                    
+                    if (in_array(false, $variablePage, true)) unset($variablePage['postProduit']);
+                }
                 if (empty($variablePage['postProduit']['ref'])) $variablePage['errMsg'] = true;
                 else $variablePage['produit'] = getProduit($variablePage['postProduit']['ref']);
 
