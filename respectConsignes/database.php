@@ -154,3 +154,20 @@ function getCommandeAttente() {
     //renvoie commande remise en forme et référence commande si elle existe
     return;
 }
+
+
+
+function getNbArticles() {
+    $bdd = dbConnect();
+
+    //Récupérer la liste des catégories d articles
+    $query = 'SELECT COUNT(*)
+                FROM produit';
+    $request = $bdd->prepare($query);//Préparation de la requête
+    if (!$request->execute()) throw new Exception("Base De Données : Echec d'exécution");
+
+    $nombreArticles = $request->fetch(PDO::FETCH_NUM)[0];//équivaut à $nombreArticles[0];
+    $request->closeCursor();
+
+    return $nombreArticles;
+}

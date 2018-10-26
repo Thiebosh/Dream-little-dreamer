@@ -11,8 +11,10 @@ else {
     //si post contient infos d'un article, ajoute l'article
     if (isset($postSecure['ref'], $postSecure['article'], $postSecure['prix'], $postSecure['quant'], $postSecure['dispo'])) {
         
+        //si le panier n'est pas vide et que le panier contient une clé associative fille égale à postSecure['article"] (nom article) alors modifie la quantité
         if (!empty($_SESSION['panier']) && array_key_exists($postSecure['article'], $_SESSION['panier'])) $_SESSION['panier'][$postSecure['article']]['quantite'] = $postSecure['quant'];
 
+        //sinon, crée nouvelle entrée du nom de l'article
         else $_SESSION['panier'][$postSecure['article']] = array('id_produit'   => $postSecure['ref'],
                                                                 'produit'       => $postSecure['article'],
                                                                 'prix'          => $postSecure['prix'],

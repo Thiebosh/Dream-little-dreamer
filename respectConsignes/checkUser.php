@@ -1,13 +1,16 @@
 <?php
 function inscription() {
-    //si infos valide : inscrit client et redirige sur page de connexion
+    
+    //si infos valide : inscrit client et redirige sur page de connexion 
+        // /!\ hasher mdp si toutes les var du post sont correctes
+        //password_hash($passwordToHash, PASSWORD_DEFAULT);//selectionne par défaut meilleure fonction de hashage
     //sinon : affiche erreur appropriée
 }
 
 function connexion($postSecure) {
-    $donneesClient = getClient($postSecure['email']);
+    $donneesClient = getClient($postSecure['email']); //pour avoir infos du client par rapport à son email
 
-    //if (!password_verify($variablePage['post']['pass'], $donneesClient['password'])) {//vérifie le résultat : ne stocke jamais mdp en clair en bdd
+    //if (!password_verify($variablePage['post']['pass'], $donneesClient['password'])) {//(hash premier mdp et le compare au second, déjà hashé) vérifie le résultat : ne stocke jamais mdp en clair en bdd
     if ($postSecure['pass'] != $donneesClient['password']) return false; //message erreur
     else {
         $_SESSION['client'] = $donneesClient;

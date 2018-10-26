@@ -6,7 +6,7 @@ ob_start(); ?>
 		<br><hr><br>
 
 		<?php $displaySeparateurCat = false;
-			$panierInit = isset($_SESSION['panier']);
+			$panierInit = !empty($_SESSION['panier']);
 			foreach ($variablePage['boutique'] as $categorie) { 
 				if ($displaySeparateurCat === true) echo '<br><hr><br>'; ?>
 	

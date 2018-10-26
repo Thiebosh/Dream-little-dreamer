@@ -1,7 +1,7 @@
 <section id="pagePanier">
 	<h2 id="title1">VOTRE PANIER</h2>
 	
-	<?php if (!empty($_SESSION['panier'])) { ?>
+	<?php if (!empty($_SESSION['panier'])) { /*pas besoin d'afficher le tableau si vide*/ ?>
 		<table>
 			<thead>
 				<tr>

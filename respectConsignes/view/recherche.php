@@ -14,6 +14,7 @@
                         <img class="images-produits" src="view/images/produit<?= htmlspecialchars($article['id']) ?>.jpg" alt="Visuel article">
                         <div>
                             <h4>
+							<!-- détail arrive... -->
                             <?= htmlspecialchars( str_replace(ucfirst($variablePage['recherche']), strtoupper($variablePage['recherche']), 
                                         str_replace($variablePage['recherche'], strtoupper($variablePage['recherche']), $article['nom'])) ) ?>
                             </h4>

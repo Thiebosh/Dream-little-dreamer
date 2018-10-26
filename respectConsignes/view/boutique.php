@@ -4,7 +4,7 @@
 	<br><hr><br>
 
 	<?php $displaySeparateurCat = false;
-		$panierInit = isset($_SESSION['panier']);
+		$panierInit = !empty($_SESSION['panier']);
 		foreach ($variablePage['boutique'] as $categorie) { 
 			if ($displaySeparateurCat === true) echo '<br><hr><br>'; ?>
 
@@ -21,7 +21,8 @@
 								<?= htmlspecialchars($article['description']) ?><br>
 								<b><?= htmlspecialchars($article['prix']) ?> euros</b><br>
 								<br><br>
-								<a class="button1" href="index.php?action=produit&ref=<?= htmlspecialchars($article['id']) ?>">
+								<a class="button1" href="index.php?page=produit&ref=<?= htmlspecialchars($article['id']) ?>">
+									<!-- si panier existe et contient nom article en cours d'affichage... -->
 									<?= ($panierInit && array_key_exists($article['nom'], $_SESSION['panier']))? 'Modifier le' : 'Ajouter au' ?> panier
 								</a>
 							</div>
