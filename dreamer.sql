@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 26 oct. 2018 à 16:13
--- Version du serveur :  5.7.23
--- Version de PHP :  7.2.10
+-- Généré le :  ven. 09 nov. 2018 à 14:43
+-- Version du serveur :  5.7.21
+-- Version de PHP :  5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `client` (
   `genre` tinyint(1) NOT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `client`
@@ -66,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `commande` (
   `id_produit` int(11) NOT NULL,
   `qte_achetee` int(11) NOT NULL,
   `ad_livraison` varchar(255) NOT NULL,
+  `est_provisoire` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
@@ -73,17 +74,17 @@ CREATE TABLE IF NOT EXISTS `commande` (
 -- Déchargement des données de la table `commande`
 --
 
-INSERT INTO `commande` (`id`, `num_commande`, `id_client`, `id_produit`, `qte_achetee`, `ad_livraison`) VALUES
-(1, 1, 3, 1, 3, '7 rue de la savane 12345 Au-soleil'),
-(2, 1, 3, 4, 1, '7 rue de la savane 12345 Au-soleil'),
-(3, 2, 1, 4, 3, '3 rue des prairies 90900 Prairie'),
-(4, 2, 1, 1, 7, '3 rue des prairies 90900 Prairie'),
-(9, 3, 1, 3, 3, '3 rue des prairies 90900 Prairie'),
-(10, 4, 1, 3, 6, '3 rue des prairies 90900 Prairie'),
-(11, 5, 1, 4, 8, '3 rue des prairies 90900 Prairie'),
-(12, 5, 1, 3, 5, '3 rue des prairies 90900 Prairie'),
-(13, 5, 1, 2, 7, '3 rue des prairies 90900 Prairie'),
-(14, 5, 1, 1, 5, '3 rue des prairies 90900 Prairie');
+INSERT INTO `commande` (`id`, `num_commande`, `id_client`, `id_produit`, `qte_achetee`, `ad_livraison`, `est_provisoire`) VALUES
+(1, 1, 3, 1, 3, '7 rue de la savane 12345 Au-soleil', 0),
+(2, 1, 3, 4, 1, '7 rue de la savane 12345 Au-soleil', 0),
+(3, 2, 1, 4, 3, '3 rue des prairies 90900 Prairie', 0),
+(4, 2, 1, 1, 7, '3 rue des prairies 90900 Prairie', 0),
+(9, 3, 1, 3, 3, '3 rue des prairies 90900 Prairie', 0),
+(10, 4, 1, 3, 6, '3 rue des prairies 90900 Prairie', 0),
+(11, 5, 1, 4, 8, '3 rue des prairies 90900 Prairie', 0),
+(12, 5, 1, 3, 5, '3 rue des prairies 90900 Prairie', 0),
+(13, 5, 1, 2, 7, '3 rue des prairies 90900 Prairie', 0),
+(14, 5, 1, 1, 5, '3 rue des prairies 90900 Prairie', 0);
 
 -- --------------------------------------------------------
 
