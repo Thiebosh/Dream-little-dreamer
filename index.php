@@ -20,10 +20,22 @@ if (isset($_GET['action'])) {
 
         case 'inscription':
             if (isset($_POST['civil'], $_POST['nom'], $_POST['prenom'], $_POST['tel'], $_POST['email'], $_POST['adresse'], $_POST['password1'], $_POST['password2'])) {
-                $variablePage['postInscription'] = array('civil' => $_POST['civil'], 'nom' => $_POST['nom'], 'prenom' => $_POST['prenom'], 'tel' => $_POST['tel'], 'email' => $_POST['email'], 'adresse' => $_POST['adresse'], 'pass1' => $_POST['password1'], 'pass2' => $_POST['password2']);
+                $variablePage['postInscription']['civil'] = filter_input(INPUT_POST, 'civil', FILTER_CALLBACK,
+                    ['options' => function($civil) { 
+                        switch($civil){
+                            case 'M':
+                                return 0;
+                            case 'Mme':
+                                return 1;
+                            default:
+                                return false;
+                        }
+                    }]);
                 $variablePage['postInscription']['nom'] = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
                 $variablePage['postInscription']['prenom'] = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING);
-                //$variablePage['postInscription']['tel'] = filter_input(INPUT_POST, 'tel', FILTER_SANITIZE_STRING);
+                //filtre numero téléphone
+                $variablePage['postInscription']['tel'] = filter_input(INPUT_POST, 'tel', FILTER_CALLBACK,
+                    ['options' => function($telATester) { return preg_match('`^0[1-9]([-. ]?[0-9]{2}){4}$`', $telATester) ? $telATester : false; }]);
                 $variablePage['postInscription']['email'] = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
                 $variablePage['postInscription']['adresse'] = filter_input(INPUT_POST, 'adresse', FILTER_SANITIZE_STRING);
                 $variablePage['postInscription']['password1'] = filter_input(INPUT_POST, 'password1', FILTER_SANITIZE_STRING);
@@ -87,7 +99,11 @@ try {//appels bdd peut jeter des erreurs
     if (!empty($variablePage['action'])) {
         if (empty($_SESSION['client'])) {
             if      ($variablePage['action'] == 'connexion'     && !empty($variablePage['postConnexion'])   && !connexion($variablePage['postConnexion']))     $variablePage['errMsg'] = true;//sinon, redirigé par la fonction
-            else if ($variablePage['action'] == 'inscription'   && !empty($variablePage['postInscription']) && !inscription($variablePage['postInscription'])) $variablePage['errMsg'] = true;//sinon, redirigé par la fonction
+            else if ($variablePage['action'] == 'inscription'   && !empty($variablePage['postInscription'])) {
+                $retourInscription = inscription($variablePage['postInscription']);
+                if ($retourInscription === 1 || $retourInscription === 2) $variablePage['errMsg'] = $retourInscription;//sinon, redirigé par la fonction
+                if ($retourInscription === 0) $variablePage['confirmMsg'] = $retourInscription;
+            }
             $variablePage['page'] = $variablePage['action'];//si encore sur ce script : charge page
         }
         else if ($variablePage['action'] == 'deconnexion') deconnexion();

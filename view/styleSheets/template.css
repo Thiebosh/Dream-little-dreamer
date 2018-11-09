@@ -18,6 +18,8 @@ a {
 
 .errMsg { color: crimson; }
 
+.confirmMsg { color: blueviolet; }
+
 .button1:hover, .button2:hover, .buttonNav:hover { cursor: pointer; }
 
 .button1, .button2 {

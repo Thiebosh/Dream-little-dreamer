@@ -3,7 +3,22 @@
         <h2 class="title1">CRÉER VOTRE COMPTE</h2>
         <h3 class="title2">Déjà un compte ? <a href="index.php?page=connexion">Connectez-vous</a></h3>
 
-        <?php if (isset($variablePage['errMsg'])) echo '<aside class="errMsg">Inscription échouée</aside>' ?>
+        <?php if (isset($variablePage['errMsg'])) {
+            echo '<aside class="errMsg">';
+            switch ($variablePage['errMsg']) {
+                case 1: 
+                    echo 'Votre adresse email est déjà utilisée par un membre';
+                break;
+                case 2:
+                    echo 'Vos mots de passe ne sont pas identiques';
+                break;
+            }
+            echo '</aside>';
+        }  
+        if (isset($variablePage['confirmMsg']) && $variablePage['confirmMsg'] === 0)
+            echo '<aside class="confirmMsg">Inscription validée. Bienvenue sur notre site !</aside>';
+        ?>
+
         <form  method="post" action="index.php?action=inscription">
             <p> 
                 <label><input type="radio" name="civil" value="M" checked="checked"/> M</label>

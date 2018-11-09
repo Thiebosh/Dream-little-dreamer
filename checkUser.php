@@ -1,6 +1,13 @@
 <?php
-function inscription() {
-    
+function inscription($postSecure) {
+    if (in_array($postSecure['email'], getAllClients())) return 1;
+    if ($postSecure['password1']!=$postSecure['password2']) return 2;
+
+    $postSecure['hash_password'] = sha1($postSecure['password1']);
+    createNewClient($postSecure);
+    //header('Location: index.php?page=connexion');
+    //exit();
+    return 0;
     //si infos valide : inscrit client et redirige sur page de connexion 
         // /!\ hasher mdp si toutes les var du post sont correctes
         //password_hash($passwordToHash, PASSWORD_DEFAULT);//selectionne par défaut meilleure fonction de hashage
@@ -31,3 +38,4 @@ function deconnexion() {
     header('Location: index.php?page=accueil');//ou connexion
     exit();
 }
+

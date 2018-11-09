@@ -48,6 +48,41 @@ function getClient($email) {
     return $donneesClient;
 }
 
+function createNewClient($data) {
+    $bdd = dbConnect();
+
+    $query = 'INSERT INTO client(nom, prenom, ad_livraison, tel, email, genre, password/*, etat*/) 
+                    VALUES(:nom, :prenom, :adresse, :tel, :email, :civil, :password/*, :etat*/)';
+    
+    $table = array('nom' => $data['nom'], /*'etat' => ($estProvisoire === TRUE)? 'en attente' : 'confirmé',*/
+                    'prenom' => $data['prenom'], 
+                    'adresse'=> $data['adresse'],
+                    'tel' => $data['tel'],
+                    'email' => $data['email'],
+                    'civil' => $data['civil'],
+                    'password' => $data['hash_password']);
+
+    $request = $bdd->prepare($query);
+    if (!$request->execute($table)) throw new Exception("Base De Données : Echec d'exécution");
+}
+
+function getAllClients() {
+    $bdd = dbConnect();
+
+    //Récupérer la liste des catégories d articles
+    $query = 'SELECT email FROM client';
+    $request = $bdd->prepare($query);//Préparation de la requête
+    if (!$request->execute()) throw new Exception("Base De Données : Echec d'exécution");
+
+    $mailClients = $request->fetchAll(PDO::FETCH_ASSOC);
+    $request->closeCursor();
+    $emails = array();
+    foreach ($mailClients as $mail) {
+        array_push($emails, $mail['email']);
+    }
+
+    return $emails;
+}
 
 function getProduit($id_produit) {
     $bdd = dbConnect();
@@ -149,12 +184,12 @@ function setCommande($estProvisoire) {
     }
 }
 
+
 function getCommandeAttente() {
     //récupère données commande du client si elle existe puis la supprime de la table
     //renvoie commande remise en forme et référence commande si elle existe
     return;
 }
-
 
 
 function getNbArticles() {
