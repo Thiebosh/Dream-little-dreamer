@@ -43,7 +43,10 @@
 				<aside>
 					<a class="button1" href="index.php?page=boutique">Revenir à la boutique</a> 
 					<?php if ($variablePage['produit']['quantite_dispo'] != 0) { ?>
-						<input type="submit" class="button1" value="<?= ($intoPanier)? 'Modifier le' : 'Ajouter au' ?> panier">
+						<?php if (!empty($_SESSION['client'])) { ?>
+							<input type="submit" class="button1" value="<?= ($intoPanier)? 'Modifier le' : 'Ajouter au' ?> panier">
+						<?php }
+                		else echo '<a class="button1" href="index.php?page=connexion">Se connecter</a>' ?>
 					<?php } ?>
 				</aside>
 			</form>

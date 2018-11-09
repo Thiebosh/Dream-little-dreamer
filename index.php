@@ -14,26 +14,16 @@ if (isset($_GET['action'])) {
                 $variablePage['postConnexion']['email'] = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
                 $variablePage['postConnexion']['pass'] = filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING);
                     
-                if (in_array(false, $variablePage, true)) unset($variablePage['postConnexion']);
+                if (in_array(false, $variablePage['postConnexion'], true)) unset($variablePage['postConnexion']);
             }
         break;
 
         case 'inscription':
             if (isset($_POST['civil'], $_POST['nom'], $_POST['prenom'], $_POST['tel'], $_POST['email'], $_POST['adresse'], $_POST['password1'], $_POST['password2'])) {
                 $variablePage['postInscription']['civil'] = filter_input(INPUT_POST, 'civil', FILTER_CALLBACK,
-                    ['options' => function($civil) { 
-                        switch($civil){
-                            case 'M':
-                                return 0;
-                            case 'Mme':
-                                return 1;
-                            default:
-                                return false;
-                        }
-                    }]);
+                    ['options' => function($civil) { switch($civil) { case 'M': return 0; case 'Mme': return 1; default: return false; } }]);
                 $variablePage['postInscription']['nom'] = filter_input(INPUT_POST, 'nom', FILTER_SANITIZE_STRING);
                 $variablePage['postInscription']['prenom'] = filter_input(INPUT_POST, 'prenom', FILTER_SANITIZE_STRING);
-                //filtre numero téléphone
                 $variablePage['postInscription']['tel'] = filter_input(INPUT_POST, 'tel', FILTER_CALLBACK,
                     ['options' => function($telATester) { return preg_match('`^0[1-9]([-. ]?[0-9]{2}){4}$`', $telATester) ? $telATester : false; }]);
                 $variablePage['postInscription']['email'] = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
@@ -41,7 +31,10 @@ if (isset($_GET['action'])) {
                 $variablePage['postInscription']['password1'] = filter_input(INPUT_POST, 'password1', FILTER_SANITIZE_STRING);
                 $variablePage['postInscription']['password2'] = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
 
-                if (in_array(false, $variablePage, true)) unset($variablePage['postInscription']);
+                if (in_array(false, $variablePage['postInscription'], true)) {
+                    unset($variablePage['postInscription']);
+                    $variablePage['errMsg'] = 0;
+                }
             }
         break;
     }
@@ -52,7 +45,7 @@ else {
             if (isset($_POST['search'])) {
                 $variablePage['postSearch']['search'] = filter_input(INPUT_POST, 'search',  FILTER_SANITIZE_STRING);
                 
-                if (in_array(false, $variablePage, true)) unset($variablePage['postSearch']);
+                if ($variablePage['postSearch']['search'] === false) unset($variablePage['postSearch']);
             }
         break;
 
@@ -60,7 +53,7 @@ else {
             if (isset($_GET['ref'])) {
                 $variablePage['postProduit']['ref'] = filter_input(INPUT_GET, 'ref', FILTER_VALIDATE_INT);
                 
-                if (in_array(false, $variablePage, true)) unset($variablePage['postProduit']);
+                if ($variablePage['postProduit']['ref'] === false) unset($variablePage['postProduit']);
             }
         break;
 
@@ -73,7 +66,7 @@ else {
                 $variablePage['postPanier']['dispo']      = filter_input(INPUT_POST, 'dispo',     FILTER_VALIDATE_INT);
 
                 //on regarde s'il y a un false dans le tableau variablePage['postPanier] avec une comparaison stricte : comparaison du type (sinon 0 considéré comme false)
-                if (in_array(false, $variablePage, true)) unset($variablePage['postPanier']); //tout ou rien (true de fin => comparaison du type. sinon, valeur)
+                if (in_array(false, $variablePage['postPanier'], true)) unset($variablePage['postPanier']); //tout ou rien (true de fin => comparaison du type. sinon, valeur)
             }
             else if (isset($_POST['supprimeArticle']))  $variablePage['postPanier']['supprimeArticle']  = filter_input(INPUT_POST, 'supprimeArticle',   FILTER_SANITIZE_STRING);
             else if (isset($_POST['supprimePanier']))   $variablePage['postPanier']['supprimePanier']   = filter_input(INPUT_POST, 'supprimePanier',    FILTER_VALIDATE_BOOLEAN);

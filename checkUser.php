@@ -21,9 +21,10 @@ function connexion($postSecure) {
     if (sha1($postSecure['pass']) != $donneesClient['password']) $variablePage['errMsg'] = true; //message erreur
     else {
         $_SESSION['client'] = $donneesClient;
-        if (!empty($tmp = getCommandeAttente())) {//récupération du panier provisoire, s'il existe
+        $tmp = getCommandeAttente($_SESSION['client']['id']);
+        if (!empty($tmp)) {//récupération du panier provisoire, s'il existe
             $_SESSION['panier'] = $tmp['panier'];
-            $_SESSION['client']['refCommande'] = $tmp['refVide'];
+            $_SESSION['client']['refCommandeFree'] = $tmp['refVide'];
         }
 
         header('Location: index.php?page=panier');//ou accueil ou profil ou boutique
@@ -32,7 +33,7 @@ function connexion($postSecure) {
 }
 
 function deconnexion() {
-    //if (!empty($_SESSION['panier'])) setCommande(true);//enregistrement du panier en provisoire, s'il existe
+    if (!empty($_SESSION['panier'])) setCommande(true);//enregistrement du panier en provisoire, s'il existe
 
     session_destroy();//suppression des variables globales
     header('Location: index.php?page=accueil');//ou connexion

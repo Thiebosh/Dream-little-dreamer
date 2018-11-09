@@ -6,8 +6,7 @@
             <img src="view/images/valid.jpg" alt="Visuel validation">
             <span>
                 <a class="button1" href="index.php?page=panier">Retour</a>
-                <?php if (!empty($_SESSION['client'])) echo '<a class="button1" href="index.php?page=confirmation">Confirmer</a>';
-                else echo '<a class="button1" href="index.php?page=connexion">Se connecter</a>' ?>
+                <a class="button1" href="index.php?page=confirmation">Confirmer</a>
             </span>
         </article>
     </section>

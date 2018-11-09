@@ -51,10 +51,10 @@ function getClient($email) {
 function createNewClient($data) {
     $bdd = dbConnect();
 
-    $query = 'INSERT INTO client(nom, prenom, ad_livraison, tel, email, genre, password/*, etat*/) 
-                    VALUES(:nom, :prenom, :adresse, :tel, :email, :civil, :password/*, :etat*/)';
+    $query = 'INSERT INTO client(nom, prenom, ad_livraison, tel, email, genre, password) 
+                    VALUES(:nom, :prenom, :adresse, :tel, :email, :civil, :password)';
     
-    $table = array('nom' => $data['nom'], /*'etat' => ($estProvisoire === TRUE)? 'en attente' : 'confirmé',*/
+    $table = array('nom' => $data['nom'],
                     'prenom' => $data['prenom'], 
                     'adresse'=> $data['adresse'],
                     'tel' => $data['tel'],
@@ -147,28 +147,31 @@ function getRecherche($recherche) {
 
 
 
-function setCommande($estProvisoire) {
+function setCommande($estProvisoire) {//changer ici, dans action/confirmation et dans checkUser
     if (empty($_SESSION['panier'])) throw new Exeption("Enregistrement de la commande : Panier vide");
     if (empty($_SESSION['client'])) throw new Exeption("Enregistrement de la commande : Client déconnecté");
     $bdd = dbConnect();
 
 
     //determine numero commande
-    $query = 'SELECT MAX(num_commande) as nbCommandes
-                FROM commande';
-    $request = $bdd->prepare($query);
-    if (!$request->execute()) throw new Exception("Base De Données : Echec d'exécution");
+    if (!empty($_SESSION['client']['refCommandeFree'])) $refCommande = $_SESSION['client']['refCommandeFree'];
+    else {
+        $query = 'SELECT MAX(num_commande) as nbCommandes
+                    FROM commande';
+        $request = $bdd->prepare($query);
+        if (!$request->execute()) throw new Exception("Base De Données : Echec d'exécution");
 
-    $refCommande = $request->fetch(PDO::FETCH_ASSOC)['nbCommandes'] + 1;
-    $request->closeCursor();
+        $refCommande = $request->fetch(PDO::FETCH_ASSOC)['nbCommandes'] + 1;
+        $request->closeCursor();
+    }
 
 
     //pour chaque article dans le panier
     foreach ($_SESSION['panier'] as $article) {
         //enregistre la commande
-        $query = 'INSERT INTO commande(num_commande, id_client, id_produit, qte_achetee, ad_livraison/*, etat*/) 
-                    VALUES(:commande, :client, :produit, :quantite, :adresse/*, :etat*/)';
-        $table = array('commande' => $refCommande, /*'etat' => ($estProvisoire === TRUE)? 'en attente' : 'confirmé',*/
+        $query = 'INSERT INTO commande(num_commande, id_client, id_produit, qte_achetee, ad_livraison, est_provisoire) 
+                    VALUES(:commande, :client, :produit, :quantite, :adresse, :provisoire)';
+        $table = array('commande' => $refCommande, 'provisoire' => ($estProvisoire === TRUE)? 1 : 0,
                         'produit' => $article['id_produit'], 'quantite' => $article['quantite'], 
                         'client' => $_SESSION['client']['id'], 'adresse' => $_SESSION['client']['ad_livraison']);
         $request = $bdd->prepare($query);
@@ -185,10 +188,56 @@ function setCommande($estProvisoire) {
 }
 
 
-function getCommandeAttente() {
-    //récupère données commande du client si elle existe puis la supprime de la table
-    //renvoie commande remise en forme et référence commande si elle existe
-    return;
+function getCommandeAttente($refClient) {
+    $bdd = dbConnect();
+
+    //récupère référence de commande en attente et nombre de produits associés
+    $query = 'SELECT COUNT(id_produit) AS nbr, num_commande
+            FROM commande 
+            WHERE id_client = :client AND est_provisoire = 1';
+    $request = $bdd->prepare($query);
+
+    if (!$request->execute(array('client' => $refClient))) throw new Exception("Base De Données : Echec d'exécution");
+    $data = $request->fetchAll(PDO::FETCH_ASSOC)[0];
+    $nbArticles = $data['nbr'];
+    $refCommande = $data['num_commande'];
+
+
+    //s'ils n'y a aucun article enregistré : fini. sinon implicite
+    if ($nbArticles === 0) return false;
+    
+
+    //récupère liste des articles et quantité associée
+    $query = 'SELECT id_produit, qte_achetee 
+            FROM commande 
+            WHERE num_commande = :refCommande';
+    $request = $bdd->prepare($query);
+
+    if (!$request->execute(array('refCommande' => $refCommande))) throw new Exception("Base De Données : Echec d'exécution");
+    $data = $request->fetchAll(PDO::FETCH_ASSOC);
+
+
+    //récupère l'ensemble des données de chaque article de la liste et reforme l'arborescence du panier
+    foreach ($data as $article) {
+        $dataArticle = getProduit($article['id_produit']);
+        $oldPanier[$dataArticle['nom']] = array('id_produit'    => $article['id_produit'],
+                                                'produit'       => $dataArticle['nom'],
+                                                'prix'          => $dataArticle['prix'],
+                                                'quantite'      => $article['qte_achetee'],
+                                                'quant_dispo'   => $dataArticle['quantite_dispo'],
+                                                'total'   => $dataArticle['prix'] * $article['qte_achetee']);
+    }
+
+
+    //libère la référence de commande récupérée
+    $query = 'DELETE FROM commande
+            WHERE num_commande = :refCommande';
+    $request = $bdd->prepare($query);
+    if (!$request->execute(array('refCommande' => $refCommande))) throw new Exception("Base De Données : Echec d'exécution");
+
+    
+    //retourne le nouveau panier et la référence libérée
+    return array('refVide' => $refCommande, 'panier' => $oldPanier);
 }
 
 

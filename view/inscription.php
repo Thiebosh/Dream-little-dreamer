@@ -6,6 +6,9 @@
         <?php if (isset($variablePage['errMsg'])) {
             echo '<aside class="errMsg">';
             switch ($variablePage['errMsg']) {
+                case 0:
+                    echo 'Un ou plusieurs champs sont incorrects';
+                break;
                 case 1: 
                     echo 'Votre adresse email est déjà utilisée par un membre';
                 break;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 09 nov. 2018 à 14:43
+-- Généré le :  ven. 09 nov. 2018 à 17:09
 -- Version du serveur :  5.7.21
 -- Version de PHP :  5.6.35
 
@@ -83,8 +83,8 @@ INSERT INTO `commande` (`id`, `num_commande`, `id_client`, `id_produit`, `qte_ac
 (10, 4, 1, 3, 6, '3 rue des prairies 90900 Prairie', 0),
 (11, 5, 1, 4, 8, '3 rue des prairies 90900 Prairie', 0),
 (12, 5, 1, 3, 5, '3 rue des prairies 90900 Prairie', 0),
-(13, 5, 1, 2, 7, '3 rue des prairies 90900 Prairie', 0),
-(14, 5, 1, 1, 5, '3 rue des prairies 90900 Prairie', 0);
+(13, 5, 1, 2, 7, '3 rue des prairies 90900 Prairie', 1),
+(14, 5, 1, 1, 5, '3 rue des prairies 90900 Prairie', 1);
 
 -- --------------------------------------------------------
 
