@@ -14,7 +14,9 @@ if (isset($_GET['action'])) {
                 $variablePage['postConnexion']['email'] = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
                 $variablePage['postConnexion']['pass'] = filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_STRING);
                     
-                if (in_array(false, $variablePage['postConnexion'], true)) unset($variablePage['postConnexion']);
+                if (in_array(false, $variablePage['postConnexion'], true)) {
+                    unset($variablePage['postConnexion']);
+                }
             }
         break;
 
@@ -45,7 +47,9 @@ else {
             if (isset($_POST['search'])) {
                 $variablePage['postSearch']['search'] = filter_input(INPUT_POST, 'search',  FILTER_SANITIZE_STRING);
                 
-                if ($variablePage['postSearch']['search'] === false) unset($variablePage['postSearch']);
+                if ($variablePage['postSearch']['search'] === false) {
+                    unset($variablePage['postSearch']);
+                }
             }
         break;
 
@@ -53,7 +57,9 @@ else {
             if (isset($_GET['ref'])) {
                 $variablePage['postProduit']['ref'] = filter_input(INPUT_GET, 'ref', FILTER_VALIDATE_INT);
                 
-                if ($variablePage['postProduit']['ref'] === false) unset($variablePage['postProduit']);
+                if ($variablePage['postProduit']['ref'] === false) {
+                    unset($variablePage['postProduit']);
+                }
             }
         break;
 
@@ -66,10 +72,16 @@ else {
                 $variablePage['postPanier']['dispo']      = filter_input(INPUT_POST, 'dispo',     FILTER_VALIDATE_INT);
 
                 //on regarde s'il y a un false dans le tableau variablePage['postPanier] avec une comparaison stricte : comparaison du type (sinon 0 considéré comme false)
-                if (in_array(false, $variablePage['postPanier'], true)) unset($variablePage['postPanier']); //tout ou rien (true de fin => comparaison du type. sinon, valeur)
+                if (in_array(false, $variablePage['postPanier'], true)) { //tout ou rien (true de fin => comparaison du type. sinon, valeur)
+                    unset($variablePage['postPanier']);
+                }
             }
-            else if (isset($_POST['supprimeArticle']))  $variablePage['postPanier']['supprimeArticle']  = filter_input(INPUT_POST, 'supprimeArticle',   FILTER_SANITIZE_STRING);
-            else if (isset($_POST['supprimePanier']))   $variablePage['postPanier']['supprimePanier']   = filter_input(INPUT_POST, 'supprimePanier',    FILTER_VALIDATE_BOOLEAN);
+            else if (isset($_POST['supprimeArticle'])) {
+                $variablePage['postPanier']['supprimeArticle'] = filter_input(INPUT_POST, 'supprimeArticle', FILTER_SANITIZE_STRING);
+            }
+            else if (isset($_POST['supprimePanier'])) {
+                $variablePage['postPanier']['supprimePanier'] = filter_input(INPUT_POST, 'supprimePanier', FILTER_VALIDATE_BOOLEAN);
+            }
         break;
 
         //exception : reçoit pas de données mais besoin des données utilisateur pour ces pages
@@ -81,7 +93,16 @@ else {
         break;
 
         case 'confirmation':
-            if (empty($_SESSION['client'])) $variablePage['errMsg'] = true;
+            if (empty($_SESSION['client'])) {
+                $variablePage['errMsg'] = true;
+            }
+        break;
+
+        case 'commande':
+            if (empty($_SESSION['client'])) {
+                header('Location: index.php?action=connexion'); //si pas de client connecté, on ne peut pas aller sur le profil = redirection vers connexion
+                exit();
+            }
         break;
     }
 }
@@ -91,20 +112,30 @@ try {//appels bdd peut jeter des erreurs
     //une action peut rediriger le flux et une action n'a pas de valeur par défaut donc priorité
     if (!empty($variablePage['action'])) {
         if (empty($_SESSION['client'])) {
-            if      ($variablePage['action'] == 'connexion'     && !empty($variablePage['postConnexion'])   && !connexion($variablePage['postConnexion']))     $variablePage['errMsg'] = true;//sinon, redirigé par la fonction
-            else if ($variablePage['action'] == 'inscription'   && !empty($variablePage['postInscription'])) {
+            if ($variablePage['action'] == 'connexion' && !empty($variablePage['postConnexion']) && !connexion($variablePage['postConnexion'])) {//sinon, redirigé par la fonction
+                $variablePage['errMsg'] = true;
+            }
+            else if ($variablePage['action'] == 'inscription' && !empty($variablePage['postInscription'])) {
                 $retourInscription = inscription($variablePage['postInscription']);
-                if ($retourInscription === 1 || $retourInscription === 2) $variablePage['errMsg'] = $retourInscription;//sinon, redirigé par la fonction
-                if ($retourInscription === 0) $variablePage['confirmMsg'] = $retourInscription;
+                if ($retourInscription === 1 || $retourInscription === 2) {//sinon, redirigé par la fonction
+                    $variablePage['errMsg'] = $retourInscription;
+                }
+                if ($retourInscription === 0) {
+                    $variablePage['confirmMsg'] = $retourInscription;
+                }
             }
             $variablePage['page'] = $variablePage['action'];//si encore sur ce script : charge page
         }
-        else if ($variablePage['action'] == 'deconnexion') deconnexion();
+        else if ($variablePage['action'] == 'deconnexion') {
+            deconnexion();
+        }
     }
 
     //une page a forcément besoin du menu
     $variablePage['categories'] = getMenu();
-    if (!empty($variablePage['page']) && file_exists('action/' . $variablePage['page'] . '.php')) require('action/' . $variablePage['page'] . '.php');
+    if (!empty($variablePage['page']) && file_exists('action/' . $variablePage['page'] . '.php')) {
+        require('action/' . $variablePage['page'] . '.php');
+    }
 }
 catch(Exception $erreur) {
     $variablePage['page'] = 'erreur';
@@ -113,5 +144,9 @@ catch(Exception $erreur) {
 }
 
 //affichage de la page
-if (file_exists('view/' . $variablePage['page'] . '.php')) require('view/' . $variablePage['page'] . '.php');
-else require('view/erreur.php');
+if (file_exists('view/' . $variablePage['page'] . '.php')) {
+    require('view/' . $variablePage['page'] . '.php');
+}
+else {
+    require('view/erreur.php');
+}

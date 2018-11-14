@@ -1,6 +1,8 @@
 <?php ob_start(); ?>
 	<section id="pageProduit">
-		<?php if (isset($variablePage['errMsg'])) echo '<aside class="errMsg">Référence produit invalide</aside>';
+		<?php if (isset($variablePage['errMsg'])) {
+			echo '<aside class="errMsg">Référence produit invalide</aside>';
+		}
 		else {
 			$intoPanier = !empty($_SESSION['panier']) && array_key_exists($variablePage['produit']['nom'], $_SESSION['panier']); ?>
 			<form method="post" action="index.php?page=panier">
@@ -28,7 +30,9 @@
 							<td><img class="visuel" src="view/images/produit<?= htmlspecialchars($variablePage['produit']['id']) ?>.jpg" alt="Visuel article"></td>
 							<td><?= htmlspecialchars($variablePage['produit']['prix']) ?> €</td>
 							<td>
-								<?php if ($variablePage['produit']['quantite_dispo'] == 0) echo 'Produit épuisé';
+								<?php if ($variablePage['produit']['quantite_dispo'] <= 0) {
+									echo 'Produit épuisé';
+								}
 								else { ?>
 									<input type="number" name="quant" step="1" min="1" max="<?= htmlspecialchars($variablePage['produit']['quantite_dispo']) ?>"
 										title="Entre 1 et <?= htmlspecialchars($variablePage['produit']['quantite_dispo']) ?>" 
@@ -42,12 +46,14 @@
 			
 				<aside>
 					<a class="button1" href="index.php?page=boutique">Revenir à la boutique</a> 
-					<?php if ($variablePage['produit']['quantite_dispo'] != 0) { ?>
-						<?php if (!empty($_SESSION['client'])) { ?>
+					<?php if ($variablePage['produit']['quantite_dispo'] > 0) {
+						if (!empty($_SESSION['client'])) { ?>
 							<input type="submit" class="button1" value="<?= ($intoPanier)? 'Modifier le' : 'Ajouter au' ?> panier">
 						<?php }
-                		else echo '<a class="button1" href="index.php?page=connexion">Se connecter</a>' ?>
-					<?php } ?>
+                		else {
+							echo '<a class="button1" href="index.php?page=connexion">Se connecter</a>';
+						}
+					} ?>
 				</aside>
 			</form>
 		<?php } ?>

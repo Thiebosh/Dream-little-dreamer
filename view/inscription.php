@@ -18,9 +18,9 @@
             }
             echo '</aside>';
         }  
-        if (isset($variablePage['confirmMsg']) && $variablePage['confirmMsg'] === 0)
+        if (isset($variablePage['confirmMsg']) && $variablePage['confirmMsg'] === 0) {
             echo '<aside class="confirmMsg">Inscription validée. Bienvenue sur notre site !</aside>';
-        ?>
+        } ?>
 
         <form  method="post" action="index.php?action=inscription">
             <p> 

@@ -14,7 +14,9 @@
 <body>
     <header>
         <nav>
-            <?php if (!empty($_SESSION['client'])) echo '<a class="navElt buttonNav" href="index.php?action=deconnexion">Déconnexion</a>';
+            <?php if (!empty($_SESSION['client'])) {
+                echo '<a class="navElt buttonNav" href="index.php?action=deconnexion">Déconnexion</a>';
+            }
             else { ?>
                 <a class="navElt buttonNav" href="index.php?action=inscription">S'inscrire</a>
 
@@ -53,14 +55,20 @@
         </li>
         <li><a href="index.php?page=panier">MON PANIER</a></li>
         <li>
-            <?php if (!empty($_SESSION['client'])) echo '<a href="index.php?page=profil">MON PROFIL</a>';
+            <?php if (!empty($_SESSION['client'])) { ?>
+                MON COMPTE
+                <ul>
+                    <li><a href="index.php?page=profil">Mon profil</a></li>
+                    <li><a href="index.php?page=commande">Mes commandes</a></li>
+                </ul>
+            <?php }
             else { ?>
-                CONNEXION
+                ACCÈS AU SITE
                 <ul>
                     <li><a href="index.php?action=inscription">S'inscrire</a></li>
                     <li><a href="index.php?action=connexion">Se connecter</a></li>
                 </ul>
-            <?php }  ?>
+            <?php } ?>
         </li>
         
         <hr><br>

@@ -1,6 +1,8 @@
 <?php ob_start(); ?>
     <section id="pageBoutiqueSearch">
-        <?php if (isset($variablePage['errMsg'])) echo '<aside class="errMsg">Vous devez entrer votre requête dans la barre de recherche</aside>';
+        <?php if (isset($variablePage['errMsg'])) {
+            echo '<aside class="errMsg">Vous devez entrer votre requête dans la barre de recherche</aside>';
+        }
         else { ?>
             <h2 class="title1">Résultats obtenus pour "<em><?= htmlspecialchars($variablePage['recherche']) ?></em>"</h2>
             
@@ -12,7 +14,9 @@
                     $variablePage['RECHERCHE'] = strtoupper($variablePage['recherche']);
 
                     foreach ($variablePage['resultat'] as $article) {
-                        if ($displaySeparateur === true) echo'<br><hr><br>'?>
+                        if ($displaySeparateur === true) {
+                            echo'<br><hr><br>';
+                        } ?>
                         <aside>
                             <img class="images-produits" src="view/images/produit<?= htmlspecialchars($article['id']) ?>.jpg" alt="Visuel article">
                             <div>
@@ -25,7 +29,7 @@
                                 ?>
                                 </h4>
                                 <?= htmlspecialchars( str_replace($variablePage['Recherche'], $variablePage['RECHERCHE'], 
-                                            str_replace($variablePage['recherche'], $variablePage['RECHERCHE'], $article['description'])) ) ?>
+                                                        str_replace($variablePage['recherche'], $variablePage['RECHERCHE'], $article['description'])) ) ?>
                                 <br><br>
                                 <b><?= htmlspecialchars($article['prix']) ?> €</b><br>
                                 <br><br>

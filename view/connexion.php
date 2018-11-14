@@ -3,7 +3,9 @@
         <h2 class="title1">CONNECTEZ-VOUS À VOTRE COMPTE</h2>
         <h3 class="title2">Pas de compte ? <a href="index.php?page=inscription">Créez-en un</a></h3>
 
-        <?php if (isset($variablePage['errMsg'])) echo '<aside class="errMsg">Identifiant ou mot de passe erronné</aside>' ?>
+        <?php if (isset($variablePage['errMsg'])) {
+            echo '<aside class="errMsg">Identifiant ou mot de passe erronné</aside>';
+         } ?>
         <form method="post" action="index.php?action=connexion">
             <p> 
                 <label  for="email">E-MAIL</label><br>

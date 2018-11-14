@@ -1,24 +1,27 @@
 <?php
 function inscription($postSecure) {
-    if (in_array($postSecure['email'], getAllClients())) return 1;
-    if ($postSecure['password1']!=$postSecure['password2']) return 2;
+    if (in_array($postSecure['email'], getAllClients())) {
+        return 1;
+    }
+    if ($postSecure['password1'] != $postSecure['password2']) {
+        return 2;
+    }
 
     $postSecure['hash_password'] = sha1($postSecure['password1']);
     createNewClient($postSecure);
     //header('Location: index.php?page=connexion');
     //exit();
     return 0;
-    //si infos valide : inscrit client et redirige sur page de connexion 
-        // /!\ hasher mdp si toutes les var du post sont correctes
-        //password_hash($passwordToHash, PASSWORD_DEFAULT);//selectionne par défaut meilleure fonction de hashage
-    //sinon : affiche erreur appropriée
 }
+
 
 function connexion($postSecure) {
     $donneesClient = getClient($postSecure['email']); //pour avoir infos du client par rapport à son email
 
     //if (!password_verify($variablePage['post']['pass'], $donneesClient['password'])) {//(hash premier mdp et le compare au second, déjà hashé) vérifie le résultat : ne stocke jamais mdp en clair en bdd
-    if (sha1($postSecure['pass']) != $donneesClient['password']) $variablePage['errMsg'] = true; //message erreur
+    if (sha1($postSecure['pass']) != $donneesClient['password']) { //message erreur
+        $variablePage['errMsg'] = true;
+    }
     else {
         $_SESSION['client'] = $donneesClient;
         $tmp = getCommandeAttente($_SESSION['client']['id']);
@@ -32,8 +35,11 @@ function connexion($postSecure) {
     }
 }
 
+
 function deconnexion() {
-    if (!empty($_SESSION['panier'])) setCommande(true);//enregistrement du panier en provisoire, s'il existe
+    if (!empty($_SESSION['panier'])) {//enregistrement du panier en provisoire, s'il existe
+        setCommande(true);
+    }
 
     session_destroy();//suppression des variables globales
     header('Location: index.php?page=accueil');//ou connexion
