@@ -8,8 +8,7 @@
 -- Version de PHP :  5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-/*ligne ajoutée pour parer à l'exception levée : retire au niveau global le paramètre incriminé*/
-SET GLOBAL SQL_MODE = (SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));
+SET GLOBAL SQL_MODE = (SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY','')); /*ligne ajoutée pour parer à l'exception levée : retire au niveau global le paramètre incriminé*/
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";

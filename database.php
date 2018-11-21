@@ -146,7 +146,8 @@ function getCommandeAttente($refClient) {
     //récupère référence de commande en attente et nombre de produits associés
     $query = 'SELECT COUNT(id_produit) AS nbr, num_commande
             FROM commande 
-            WHERE id_client = :client AND est_provisoire = 1';
+            WHERE id_client = :client AND est_provisoire = 1
+            GROUP BY num_commande';
     $request = $bdd->prepare($query);
 
     if (!$request->execute(array('client' => $refClient))) {
@@ -157,7 +158,7 @@ function getCommandeAttente($refClient) {
     $refCommande = $data['num_commande'];
 
 
-    //s'ils n'y a aucun article enregistré : fini. sinon implicite
+    //s'il n'y a aucun article enregistré : fini. sinon implicite
     if ($nbArticles === 0) {
         return false;
     }
