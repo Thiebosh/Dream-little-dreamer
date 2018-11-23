@@ -1,7 +1,18 @@
 <?php ob_start(); ?>
     <section id="pageBoutiqueSearch">
-        <?php if (isset($variablePage['errMsg'])) {
-            echo '<aside class="errMsg">Vous devez entrer votre requête dans la barre de recherche</aside>';
+        <?php if (isset($variablePage['errMsgs'])) {
+            echo '<aside class="errMsg">';
+            $first = true;
+            foreach ($variablePage['errMsgs'] as $msg) {
+                if ($first) {
+                    $first = false;
+                }
+                else {
+                    echo '<br>';
+                }
+                echo $msg;
+            }
+            echo '</aside>';
         }
         else { ?>
             <h2 class="title1">Résultats obtenus pour "<em><?= htmlspecialchars($variablePage['recherche']) ?></em>"</h2>

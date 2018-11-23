@@ -114,7 +114,7 @@ function getCommandes($refClient) {
     if (!$request->execute(array('client' => $refClient))) {
         throw new Exception("Base De Données : Echec d'exécution");
     }
-
+    
     foreach ($request->fetchAll(PDO::FETCH_ASSOC) as $dataCommande) {
         $commande['refCommande'] = $ref = $dataCommande['refCommande'];
         $commande['livraison'] = $dataCommande['ad_livraison'];
@@ -158,7 +158,7 @@ function getCommandeAttente($refClient) {
     $refCommande = $data['num_commande'];
 
 
-    //s'il n'y a aucun article enregistré : fini. sinon implicite
+    //s'ils n'y a aucun article enregistré : fini. sinon implicite
     if ($nbArticles === 0) {
         return false;
     }

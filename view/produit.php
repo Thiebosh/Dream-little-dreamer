@@ -1,8 +1,19 @@
 <?php ob_start(); ?>
 	<section id="pageProduit">
-		<?php if (isset($variablePage['errMsg'])) {
-			echo '<aside class="errMsg">Référence produit invalide</aside>';
-		}
+        <?php if (isset($variablePage['errMsgs'])) {
+            echo '<aside class="errMsg">';
+			$first = true;
+            foreach ($variablePage['errMsgs'] as $msg) {
+                if ($first) {
+                    $first = false;
+                }
+                else {
+                    echo '<br>';
+                }
+                echo $msg;
+            }
+            echo '</aside>';
+        }
 		else {
 			$intoPanier = !empty($_SESSION['panier']) && array_key_exists($variablePage['produit']['nom'], $_SESSION['panier']); ?>
 			<form method="post" action="index.php?page=panier">

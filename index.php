@@ -3,6 +3,7 @@ session_start();
 
 require('database.php');
 require('checkUser.php');
+require('errorMessages.php');
 
 
 //reçoit une action à exécuter ou une page à charger
@@ -16,6 +17,7 @@ if (isset($_GET['action'])) {
                     
                 if (in_array(false, $variablePage['postConnexion'], true)) {
                     unset($variablePage['postConnexion']);
+                    $variablePage['errMsgs'][] = $errMsg['filtrage']['general'];
                 }
             }
         break;
@@ -33,9 +35,14 @@ if (isset($_GET['action'])) {
                 $variablePage['postInscription']['password1'] = filter_input(INPUT_POST, 'password1', FILTER_SANITIZE_STRING);
                 $variablePage['postInscription']['password2'] = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
 
-                if (in_array(false, $variablePage['postInscription'], true)) {
+                foreach($variablePage['postInscription'] as $key => $content) {
+                    if ($content === false) {
+                        $variablePage['errMsgs'][] = 'Champ ' . $key . ' : ' . $errMsg['filtrage']['general'];
+                    }
+                }
+
+                if (!empty($variablePage['errMsgs'])) {//conséquence
                     unset($variablePage['postInscription']);
-                    $variablePage['errMsg'] = 0;
                 }
             }
         break;
@@ -46,9 +53,10 @@ else {
         case 'recherche':
             if (isset($_POST['search'])) {
                 $variablePage['postSearch']['search'] = filter_input(INPUT_POST, 'search',  FILTER_SANITIZE_STRING);
-                
-                if ($variablePage['postSearch']['search'] === false) {
+
+                if ($variablePage['postSearch']['search'] == false) {//string vide converti à false
                     unset($variablePage['postSearch']);
+                    $variablePage['errMsgs'][] = $errMsg['filtrage']['search'];
                 }
             }
         break;
@@ -59,6 +67,7 @@ else {
                 
                 if ($variablePage['postProduit']['ref'] === false) {
                     unset($variablePage['postProduit']);
+                    $variablePage['errMsgs'][] = $errMsg['filtrage']['idProduit'];
                 }
             }
         break;
@@ -74,13 +83,20 @@ else {
                 //on regarde s'il y a un false dans le tableau variablePage['postPanier] avec une comparaison stricte : comparaison du type (sinon 0 considéré comme false)
                 if (in_array(false, $variablePage['postPanier'], true)) { //tout ou rien (true de fin => comparaison du type. sinon, valeur)
                     unset($variablePage['postPanier']);
+                    $variablePage['errMsgs'][] = $errMsg['filtrage']['general'];
                 }
             }
             else if (isset($_POST['supprimeArticle'])) {
                 $variablePage['postPanier']['supprimeArticle'] = filter_input(INPUT_POST, 'supprimeArticle', FILTER_SANITIZE_STRING);
+                if ($variablePage['postPanier']['supprimeArticle'] == false) {
+                    $variablePage['errMsgs'][] = $errMsg['filtrage']['panier']['delete'];
+                }
             }
             else if (isset($_POST['supprimePanier'])) {
                 $variablePage['postPanier']['supprimePanier'] = filter_input(INPUT_POST, 'supprimePanier', FILTER_VALIDATE_BOOLEAN);
+                if ($variablePage['postPanier']['supprimeArticle'] == false) {
+                    $variablePage['errMsgs'][] = $errMsg['filtrage']['panier']['drop'];
+                }
             }
         break;
 
@@ -94,7 +110,7 @@ else {
 
         case 'confirmation':
             if (empty($_SESSION['client'])) {
-                $variablePage['errMsg'] = true;
+                $variablePage['errMsgs'][] = $errMsg['filtrage']['confirmation'];
             }
         break;
 
@@ -112,17 +128,12 @@ try {//appels bdd peut jeter des erreurs
     //une action peut rediriger le flux et une action n'a pas de valeur par défaut donc priorité
     if (!empty($variablePage['action'])) {
         if (empty($_SESSION['client'])) {
-            if ($variablePage['action'] == 'connexion' && !empty($variablePage['postConnexion']) && !connexion($variablePage['postConnexion'])) {//sinon, redirigé par la fonction
-                $variablePage['errMsg'] = true;
+            if ($variablePage['action'] == 'connexion' && !empty($variablePage['postConnexion'])) {
+                connexion($variablePage['postConnexion']);//redirige le script si arrive a connecter
+                $variablePage['errMsgs'][] = $errMsg['construction']['connexion'];
             }
             else if ($variablePage['action'] == 'inscription' && !empty($variablePage['postInscription'])) {
-                $retourInscription = inscription($variablePage['postInscription']);
-                if ($retourInscription === 1 || $retourInscription === 2) {//sinon, redirigé par la fonction
-                    $variablePage['errMsg'] = $retourInscription;
-                }
-                if ($retourInscription === 0) {
-                    $variablePage['confirmMsg'] = $retourInscription;
-                }
+                inscription($variablePage['postInscription']);
             }
             $variablePage['page'] = $variablePage['action'];//si encore sur ce script : charge page
         }

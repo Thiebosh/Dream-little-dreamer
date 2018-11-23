@@ -1,5 +1,5 @@
 <?php
-if (!isset($variablePage['errMsg'])) {
+if (!isset($variablePage['errMsgs'])) {
     setCommande(false);
     $_SESSION['panier'] = array();
 }

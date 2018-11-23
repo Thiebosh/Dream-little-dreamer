@@ -1,7 +1,11 @@
 <?php ob_start(); ?>
     <section id="pageValidConfirm">
-        <?php if (isset($variablePage['errMsg'])) {
-            echo '<aside class="errMsg">Vous devez être connectés pour enregistrer une commande</aside>';
+        <?php if (isset($variablePage['errMsgs'])) {
+            echo '<aside class="errMsg">';
+            foreach ($variablePage['errMsgs'] as $msg) {
+                echo $msg . '<br>';
+            }
+            echo '</aside>';
         }
         else { ?>
             <h2 class="title1">FÉLICITATIONS</h2>

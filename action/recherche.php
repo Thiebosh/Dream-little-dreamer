@@ -1,8 +1,5 @@
 <?php
-if (empty($variablePage['postSearch']['search'])) {
-    $variablePage['errMsg'] = true;
-}
-else {
+if (!empty($variablePage['postSearch']['search'])) {
     $variablePage['recherche'] = $variablePage['postSearch']['search'];
     $variablePage['resultat'] = getRecherche($variablePage['recherche']);
 }
