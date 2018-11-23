@@ -3,7 +3,7 @@ session_start();
 
 require('database.php');
 require('checkUser.php');
-require('errorMessages.php');
+require('messages.php');
 
 
 //reçoit une action à exécuter ou une page à charger
@@ -133,7 +133,9 @@ try {//appels bdd peut jeter des erreurs
                 $variablePage['errMsgs'][] = $errMsg['construction']['connexion'];
             }
             else if ($variablePage['action'] == 'inscription' && !empty($variablePage['postInscription'])) {
-                inscription($variablePage['postInscription']);
+                if (inscription($variablePage['postInscription'])) {
+                    $variablePage['confirmMsg'] = $confMsg['construction']['inscription'];
+                }
             }
             $variablePage['page'] = $variablePage['action'];//si encore sur ce script : charge page
         }

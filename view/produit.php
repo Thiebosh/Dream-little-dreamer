@@ -1,20 +1,6 @@
 <?php ob_start(); ?>
 	<section id="pageProduit">
-        <?php if (isset($variablePage['errMsgs'])) {
-            echo '<aside class="errMsg">';
-			$first = true;
-            foreach ($variablePage['errMsgs'] as $msg) {
-                if ($first) {
-                    $first = false;
-                }
-                else {
-                    echo '<br>';
-                }
-                echo $msg;
-            }
-            echo '</aside>';
-        }
-		else {
+        <?php if (!isset($variablePage['errMsgs'])) { //si pas d'erreur : peut afficher la page
 			$intoPanier = !empty($_SESSION['panier']) && array_key_exists($variablePage['produit']['nom'], $_SESSION['panier']); ?>
 			<form method="post" action="index.php?page=panier">
 				<input type="hidden" name="ref" 	value="<?= htmlspecialchars($variablePage['produit']['id']) ?>">

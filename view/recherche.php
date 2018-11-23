@@ -1,20 +1,6 @@
 <?php ob_start(); ?>
     <section id="pageBoutiqueSearch">
-        <?php if (isset($variablePage['errMsgs'])) {
-            echo '<aside class="errMsg">';
-            $first = true;
-            foreach ($variablePage['errMsgs'] as $msg) {
-                if ($first) {
-                    $first = false;
-                }
-                else {
-                    echo '<br>';
-                }
-                echo $msg;
-            }
-            echo '</aside>';
-        }
-        else { ?>
+        <?php if (!isset($variablePage['errMsgs'])) { /*si pas d'erreur : peut afficher la page*/ ?>
             <h2 class="title1">Résultats obtenus pour "<em><?= htmlspecialchars($variablePage['recherche']) ?></em>"</h2>
             
             <br><hr><br>

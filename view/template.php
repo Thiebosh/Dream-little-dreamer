@@ -74,6 +74,25 @@
         <hr><br>
     </menu>
 
+    
+    <?php if (isset($variablePage['errMsgs'])) {
+        echo '<aside class="errMsg">';
+        $first = true;
+        foreach ($variablePage['errMsgs'] as $msg) {
+            if ($first) {
+                $first = false;
+            }
+            else {
+                echo '<br>';
+            }
+            echo htmlspecialchars($msg);
+        }
+        echo '</aside>';
+    }
+    else if (isset($variablePage['confirmMsg'])) {
+        echo '<aside class="confirmMsg">' . htmlspecialchars($variablePage['confirmMsg']) . '</aside>';
+    } ?>
+
     <?= $variablePage['contenuSection'] ?>
 
     <footer>

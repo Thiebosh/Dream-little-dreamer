@@ -3,17 +3,6 @@
         <h2 class="title1">CRÉER VOTRE COMPTE</h2>
         <h3 class="title2">Déjà un compte ? <a href="index.php?page=connexion">Connectez-vous</a></h3>
 
-        <?php if (isset($variablePage['errMsgs'])) {
-            echo '<aside class="errMsg">';
-            foreach ($variablePage['errMsgs'] as $msg) {
-                echo $msg . '<br>';
-            }
-            echo '</aside>';
-        }
-        if (isset($variablePage['confirmMsg']) && $variablePage['confirmMsg'] === 0) {
-            echo '<aside class="confirmMsg">Inscription validée. Bienvenue sur notre site !</aside>';
-        } ?>
-
         <form  method="post" action="index.php?action=inscription">
             <p> 
                 <label><input type="radio" name="civil" value="M" checked="checked"/> M</label>

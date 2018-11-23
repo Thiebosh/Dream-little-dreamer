@@ -1,13 +1,6 @@
 <?php ob_start(); ?>
     <section id="pageValidConfirm">
-        <?php if (isset($variablePage['errMsgs'])) {
-            echo '<aside class="errMsg">';
-            foreach ($variablePage['errMsgs'] as $msg) {
-                echo $msg . '<br>';
-            }
-            echo '</aside>';
-        }
-        else { ?>
+        <?php if (!isset($variablePage['errMsgs'])) { ?>
             <h2 class="title1">FÉLICITATIONS</h2>
             <h3 class="title2" >Votre commande a bien été prise en compte</h3>
             <article>

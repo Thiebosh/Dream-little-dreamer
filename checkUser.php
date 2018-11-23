@@ -11,7 +11,9 @@ function inscription($postSecure) {
     if (empty($variablePage['errMsgs'])) {
         $postSecure['hash_password'] = sha1($postSecure['password1']);
         createNewClient($postSecure);
+        return true;
     }
+    return false;
 }
 
 

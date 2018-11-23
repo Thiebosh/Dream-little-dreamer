@@ -10,3 +10,5 @@ $errMsg['construction']['inscription']['mail'] = 'Email déjà utilisé.';
 $errMsg['construction']['inscription']['password'] = 'Mots de passe différents';
 $errMsg['construction']['produit'] = 'Référence produit invalide';
 
+$confMsg['construction']['inscription'] = 'Inscription validée. Bienvenue sur notre site !';
+
