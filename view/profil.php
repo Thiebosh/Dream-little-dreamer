@@ -13,7 +13,7 @@
             <div>E-MAIL :               <?= $_SESSION['client']['email'] ?></div>
         </article>
         <br><br>
-        <a class="button1" href="index.php?page=deconnexion">Déconnexion</a>
+        <a class="button1" href="index.php?action=deconnexion">Déconnexion</a>
     </section>
 <?php $variablePage['contenuSection'] = ob_get_clean();
 
