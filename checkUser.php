@@ -1,19 +1,8 @@
 <?php
 
 function inscription($postSecure) {
-    if (in_array($postSecure['email'], getAllClients())) {
-        $variablePage['errMsgs'][] = $errMsg['construction']['inscription']['mail'];
-    }
-    if ($postSecure['password1'] != $postSecure['password2']) {
-        $variablePage['errMsgs'][] = $errMsg['construction']['inscription']['password'];
-    }
-    
-    if (empty($variablePage['errMsgs'])) {
-        $postSecure['hash_password'] = sha1($postSecure['password1']);
-        createNewClient($postSecure);
-        return true;
-    }
-    return false;
+    $postSecure['hash_password'] = sha1($postSecure['password1']);
+    createNewClient($postSecure);
 }
 
 

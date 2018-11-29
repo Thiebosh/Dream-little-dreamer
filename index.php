@@ -133,7 +133,15 @@ try {//appels bdd peut jeter des erreurs
                 $variablePage['errMsgs'][] = $errMsg['construction']['connexion'];
             }
             else if ($variablePage['action'] == 'inscription' && !empty($variablePage['postInscription'])) {
-                if (inscription($variablePage['postInscription'])) {
+                if (in_array($variablePage['postInscription']['email'], getAllClients())) {//si le mail recu fait partie de la liste des clients
+                    $variablePage['errMsgs'][] = $errMsg['construction']['inscription']['mail'];
+                }
+                if ($variablePage['postInscription']['password1'] != $variablePage['postInscription']['password2']) {
+                    $variablePage['errMsgs'][] = $errMsg['construction']['inscription']['password'];
+                }
+                
+                if (empty($variablePage['errMsgs'])) {
+                    inscription($variablePage['postInscription']);
                     $variablePage['confirmMsg'] = $confMsg['construction']['inscription'];
                 }
             }
