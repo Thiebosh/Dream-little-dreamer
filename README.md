@@ -1,3 +1,3 @@
-#E_commerce website project
+# Dream-little-dreamer
 
-Web site project in PHP, SQL, HTML and CSS
+E-commerce site with stock management and storage of cart
